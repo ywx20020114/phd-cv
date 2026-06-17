@@ -26,7 +26,7 @@ window.CV_DATA = {
       "location": "Tianjin, China",
       "date": "2023 – 2026 (expected)",
       "details": [
-        "Advisor: Prof. Rui Chen",
+        "Advisor: Prof. Yuzhi Zhang",
         "GPA: X.XX / 4.0  (Rank X / N, top X%)",
         "Coursework: Machine Learning, Distributed Systems, Algorithms, …",
         "Honors / Scholarships: …"
