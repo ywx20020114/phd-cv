@@ -140,17 +140,6 @@
 <div id="toast" class="toast"></div>
 
 <script>
-// Load cv-data.js with a cache-busting timestamp so the editor always starts
-// from the latest published content.
-(function () {
-  var s = document.createElement("script");
-  s.src = "cv-data.js?v=" + Date.now();
-  s.onload = init;
-  s.onerror = function () { alert("无法加载 cv-data.js"); };
-  document.head.appendChild(s);
-})();
-</script>
-<script>
 /* ---------- 工具 ---------- */
 function el(tag, attrs, html) {
   var e = document.createElement(tag);
@@ -477,6 +466,19 @@ async function publish(){
     toast("发布失败");
   }
 }
+
+/* ---------- 载入 cv-data.js（带缓存破坏）后初始化 ---------- */
+(function loadCvData(){
+  var s = document.createElement("script");
+  s.src = "cv-data.js?v=" + Date.now();
+  s.onload = function(){ init(); };
+  s.onerror = function(){
+    toast("无法加载 cv-data.js");
+    window.CV_DATA = window.CV_DATA || { basics:{}, summary:"", interests:[], education:[], publications:[], research:[], experience:[], skills:[], honors:[] };
+    init();
+  };
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>

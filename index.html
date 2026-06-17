@@ -98,19 +98,6 @@
 <a class="admin-fab no-print" href="admin.html">✎ Edit</a>
 
 <script>
-// Load cv-data.js with a cache-busting timestamp so freshly published
-// content shows up without a hard refresh.
-(function () {
-  var s = document.createElement("script");
-  s.src = "cv-data.js?v=" + Date.now();
-  s.onload = renderCV;
-  s.onerror = function () {
-    document.getElementById("cv").innerHTML =
-      "<p style='color:#c0392b'>Failed to load cv-data.js</p>";
-  };
-  document.head.appendChild(s);
-})();
-
 function renderCV() {
   // localStorage draft takes priority (from admin.html edits); otherwise use cv-data.js
   var draft = null;
@@ -244,6 +231,20 @@ function renderCV() {
   document.getElementById("cv").innerHTML = h;
   document.title = (bx.name || "CV") + " — CV";
 }
+
+// Load cv-data.js with a cache-busting timestamp so freshly published
+// content shows up without a hard refresh. Placed after renderCV so the
+// function is guaranteed defined when the script finishes loading.
+(function () {
+  var s = document.createElement("script");
+  s.src = "cv-data.js?v=" + Date.now();
+  s.onload = function () { renderCV(); };
+  s.onerror = function () {
+    document.getElementById("cv").innerHTML =
+      "<p style='color:#c0392b'>Failed to load cv-data.js</p>";
+  };
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
