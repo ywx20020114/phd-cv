@@ -68,7 +68,6 @@ window.CV_DATA = {
           "name": "ML Training Platform (Astrolabe / Compass-Tuning)",
           "bullets": [
             "Designed and built the Megatron training Docker image and a 6-stage pipeline (download → convert → train → export → upload → cleanup) supporting multi-node, multi-GPU distributed SFT/CPT/LoRA training.",
-            "Implemented a RankCoordinator using a strategy-pattern execution model (RANK_0_ONLY / ALL_RANKS / RANK_0_IF_SINGLE_MP) and a lightweight file-based barrier over shared storage for inter-node sync, with a 2-hour timeout guard for 70B+ model downloads — eliminating deadlocks without extra message-queue infra.",
             "Built real-time log streaming + LLM-powered failure diagnosis: bridged AIS Pod-log WebSocket → SSE in FastAPI and streamed LLM analysis via a thread-pool/queue, producing structured root-cause and actionable fixes.",
             "Designed a layered config-validation system (25+ hard constraints, 6 warnings, 5 hints) for Megatron YAML configs to reject invalid jobs before GPU allocation, saving wasted compute."
           ]
