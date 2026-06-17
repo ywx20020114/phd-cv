@@ -43,9 +43,9 @@ window.CV_DATA = {
       "authors": "Bin Lu, Wanxiang Yu, Haolin Wang, Jiayi Zhao, Yuzhi Zhang, and Rui Chen",
       "me": "Wanxiang Yu",
       "title": "CoMRA: A Framework for Automated Code Migration via Retrieval-Augmented Generation and Multi-Agent Collaboration",
-      "venue": "SANER 2026 CCF-B",
+      "venue": "SANER（CCF-B）",
       "year": "2026",
-      "doi": "10.1109/SANER67736.2026.00022",
+      "doi": "",
       "tag": "",
       "bullets": [
         "Proposed CoMRA, combining retrieval-augmented generation (RAG) for knowledge-enhanced code understanding with a multi-agent workflow for coordinated task execution.",
