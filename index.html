@@ -58,12 +58,10 @@
   li { margin-bottom: 3px; }
   li::marker { color: var(--accent); }
 
-  .pub { padding-left: 22px; text-indent: -22px; margin-bottom: 6px; line-height: 1.6; }
+  .pub { margin-bottom: 6px; line-height: 1.5; }
   .pub .me { text-decoration: underline; }
-  .tag { display: inline-block; font-family: "Helvetica Neue", Arial, sans-serif;
-         font-size: 9.5px; font-weight: 700; letter-spacing: .5px; line-height: 1;
-         background: var(--accent); color: #fff; padding: 3px 7px; border-radius: 4px;
-         vertical-align: baseline; white-space: nowrap; margin-left: 5px; }
+  .pub-authors { margin-bottom: 1px; }
+  .pub-title { padding-left: 18px; }
 
   .skills-row { display: flex; gap: 8px; margin-bottom: 4px; }
   .skills-row .k { flex: 0 0 130px; font-weight: bold; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5px; }
@@ -172,10 +170,13 @@ function renderCV() {
     data.publications.forEach(function (p) {
       var authors = esc(p.authors);
       if (p.me) authors = authors.replace(esc(p.me), "<span class='me'>" + esc(p.me) + "</span>");
-      h += "<div class='pub'>" + authors + ". &ldquo;<strong>" + esc(p.title) + "</strong>.&rdquo; <em>" +
+      h += "<div class='pub'>";
+      h += "<div class='pub-authors'>" + authors + ".</div>";
+      h += "<div class='pub-title'>&ldquo;<strong>" + esc(p.title) + "</strong>.&rdquo; <em>" +
            esc(p.venue) + "</em>, " + esc(p.year) + ".";
+      if (p.tag) h += " (" + esc(p.tag) + ")";
       if (p.doi) h += " DOI: " + esc(p.doi) + ".";
-      if (p.tag) h += "<span class='tag'>" + esc(p.tag) + "</span>";
+      h += "</div>";
       h += "</div>";
       h += ulist(p.bullets);
     });
