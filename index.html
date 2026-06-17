@@ -93,12 +93,12 @@
 
 <div id="draftBanner" class="draft-banner no-print" style="display:none;"></div>
 <div id="cv" class="page"></div>
-<a class="admin-fab no-print" href="admin.html">✎ 编辑简历</a>
+<a class="admin-fab no-print" href="admin.html">✎ Edit</a>
 
 <script src="cv-data.js"></script>
 <script>
 (function () {
-  // localStorage 草稿优先（来自 admin.html 的编辑），否则用 cv-data.js
+  // localStorage draft takes priority (from admin.html edits); otherwise use cv-data.js
   var draft = null;
   try {
     var raw = localStorage.getItem("cvDraft");

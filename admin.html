@@ -343,7 +343,7 @@ function clearDraft(){
 function buildFileText(){
   return "/* =====================================================================\n" +
          " *  CV DATA  —  " + (DATA.basics && DATA.basics.name || "") + "\n" +
-         " *  由 admin.html 导出。修改后覆盖此文件并推送即可更新线上简历。\n" +
+         " *  Exported from admin.html. Overwrite this file and push to update the live CV.\n" +
          " * ===================================================================== */\n" +
          "window.CV_DATA = " + JSON.stringify(DATA, null, 2) + ";\n";
 }

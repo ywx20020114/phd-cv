@@ -1,8 +1,9 @@
 /* =====================================================================
  *  CV DATA  —  Wanxiang Yu
- *  这是简历的唯一数据源。修改此文件并推送到 GitHub 即可更新线上简历。
- *  也可以打开 admin.html 用可视化表单编辑，再导出覆盖此文件。
- *  字段为空字符串 "" 时该处不显示。
+ *  Single source of truth for the CV. Edit this file and push to GitHub
+ *  to update the live site. You can also use the visual editor in
+ *  admin.html and export to overwrite this file.
+ *  Fields set to an empty string "" are hidden automatically.
  * ===================================================================== */
 window.CV_DATA = {
   basics: {
@@ -44,7 +45,7 @@ window.CV_DATA = {
     },
     {
       school: "Nankai University",
-      degree: "B.Eng. / B.Sc. in [专业]",
+      degree: "B.Eng. / B.Sc. in [Major]",
       location: "Tianjin, China",
       date: "2019 – 2023",
       details: [
@@ -143,7 +144,7 @@ window.CV_DATA = {
   ],
 
   honors: [
-    "Awards: [奖学金 / 竞赛 / 荣誉]",
+    "Awards: [Scholarships / Competitions / Honors]",
     "Languages: Chinese (native); English — TOEFL/IELTS [score], GRE [score]"
   ]
 };
