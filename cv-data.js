@@ -75,7 +75,7 @@ window.CV_DATA = {
         {
           "name": "LLM Gateway — Prompts Module & Pricing Agent (independent owner)",
           "bullets": [
-            "Built an end-to-end AI prompt-management service (data model, RESTful API, versioning, dual-format rendering) from scratch in Go (GORM); ensured correctness/perf via transactional consistency, optimistic version allocation with 409-retry, Redis caching + cursor pagination, and batch queries cutting list calls from 2N+1 → 3.",
+            "Built an end-to-end AI prompt-management service (data model, RESTful API, versioning, dual-format rendering) from scratch in Go .",
             "Built an autonomous pricing agent (Playwright + ReAct loop) that scrapes vendors' official pricing pages and syncs production MDX docs, with a multi-layer anti-hallucination system (closed-set whitelist prompting, code-level validation, temperature=0, source-text verification, 2-round self-correction with rollback) guaranteeing every published price is source-traceable."
           ]
         }
