@@ -14,29 +14,25 @@ window.CV_DATA = {
   },
   "summary": "",
   "interests": [
-    "Large Language Models for software engineering",
-    "Retrieval-augmented generation (RAG)",
-    "Multi-agent systems & LLM agents",
-    "ML systems & training infrastructure"
+    "需要按照老师修改"
   ],
   "education": [
     {
-      "school": "Nankai University — College of Software",
-      "degree": "M.Eng. / M.Sc. in Software Engineering",
+      "school": "Nankai University",
+      "degree": "M.Eng. in Software Engineering",
       "location": "Tianjin, China",
-      "date": "2023 – 2026 (expected)",
+      "date": "2024 – 2027",
       "details": [
         "Advisor: Prof. Yuzhi Zhang",
         "GPA: X.XX / 4.0  (Rank X / N, top X%)",
-        "Coursework: Machine Learning, Distributed Systems, Algorithms, …",
-        "Honors / Scholarships: …"
+        "Coursework: Machine Learning, Distributed Systems, Algorithms, …（选择一些成绩好的课）"
       ]
     },
     {
       "school": "Nankai University",
-      "degree": "B.Eng. / B.Sc. in [Major]",
+      "degree": "B.Eng. in Software Engineering",
       "location": "Tianjin, China",
-      "date": "2019 – 2023",
+      "date": "2020 – 2024",
       "details": [
         "GPA: X.XX / 4.0"
       ]
@@ -47,10 +43,10 @@ window.CV_DATA = {
       "authors": "Bin Lu, Wanxiang Yu, Haolin Wang, Jiayi Zhao, Yuzhi Zhang, and Rui Chen",
       "me": "Wanxiang Yu",
       "title": "CoMRA: A Framework for Automated Code Migration via Retrieval-Augmented Generation and Multi-Agent Collaboration",
-      "venue": "Proc. 2026 IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)",
+      "venue": "SANER 2026 CCF-B",
       "year": "2026",
       "doi": "10.1109/SANER67736.2026.00022",
-      "tag": "CCF-B",
+      "tag": "",
       "bullets": [
         "Proposed CoMRA, combining retrieval-augmented generation (RAG) for knowledge-enhanced code understanding with a multi-agent workflow for coordinated task execution.",
         "Achieved 98% conversion accuracy on a Qt4→Qt5 benchmark of 194 independently compilable programs, substantially outperforming general-purpose LLM baselines (56–84%).",
@@ -62,8 +58,8 @@ window.CV_DATA = {
   "research": [],
   "experience": [
     {
-      "org": "Shopee",
-      "role": "LLM Infrastructure / AI Platform Engineering Intern",
+      "org": "Shopee(China)",
+      "role": "AI Platform Engineering Intern",
       "location": "Beijing",
       "date": "Jun 2025 – May 2026",
       "summary": "Built core backend for Astrolabe, the internal ML experiment-management platform, and independently owned modules of the LLM Gateway (unified enterprise LLM API gateway).",
@@ -107,15 +103,15 @@ window.CV_DATA = {
   "skills": [
     {
       "category": "Languages",
-      "items": "C++ (17), Go, Python, Java"
+      "items": "Go,Python,C++"
     },
     {
       "category": "ML / LLM",
-      "items": "Megatron, PyTorch, distributed training (multi-node/GPU), RAG, multi-agent systems, ReAct, prompt engineering"
+      "items": "Megatron, PyTorch, RAG, multi-agent systems, ReAct, prompt engineering"
     },
     {
       "category": "Systems / Infra",
-      "items": "Docker, Bazel, FastAPI, GORM, Redis, MySQL, Kafka, tRPC, OpenTelemetry"
+      "items": "Docker, Redis, MySQL, Kafka, RPC"
     },
     {
       "category": "Tools",
