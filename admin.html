@@ -139,7 +139,17 @@
 
 <div id="toast" class="toast"></div>
 
-<script src="cv-data.js"></script>
+<script>
+// Load cv-data.js with a cache-busting timestamp so the editor always starts
+// from the latest published content.
+(function () {
+  var s = document.createElement("script");
+  s.src = "cv-data.js?v=" + Date.now();
+  s.onload = init;
+  s.onerror = function () { alert("无法加载 cv-data.js"); };
+  document.head.appendChild(s);
+})();
+</script>
 <script>
 /* ---------- 工具 ---------- */
 function el(tag, attrs, html) {
@@ -157,13 +167,13 @@ function deepClone(o){ return JSON.parse(JSON.stringify(o)); }
 
 /* ---------- 状态 ---------- */
 var DATA;  // 当前编辑中的数据
-(function init(){
+function init(){
   var draft = null;
   try { var raw = localStorage.getItem("cvDraft"); if (raw) draft = JSON.parse(raw); } catch(e){}
   DATA = draft ? draft : deepClone(window.CV_DATA);
   render();
   if (draft) toast("已载入本地草稿");
-})();
+}
 
 function loadFromData(){ DATA = deepClone(window.CV_DATA); render(); toast("已重置为已发布内容"); }
 
