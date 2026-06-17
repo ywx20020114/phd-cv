@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanxiang Yu — CV</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #5c5c5c;
+    --accent: #1f4e79;
+    --rule: #d0d0d0;
+    --todo-bg: #fff3cd;
+    --todo-ink: #8a6d00;
+    --maxw: 820px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font-family: "Georgia", "Times New Roman", "Songti SC", serif;
+    color: var(--ink);
+    line-height: 1.45;
+    font-size: 14px;
+    background: #f4f4f4;
+  }
+  .page {
+    max-width: var(--maxw);
+    margin: 24px auto;
+    background: #fff;
+    padding: 44px 52px 52px;
+    box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  }
+
+  /* Header */
+  header { text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 14px; margin-bottom: 18px; }
+  header h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: 1px; color: var(--ink); }
+  header .contact { font-size: 12.5px; color: var(--muted); font-family: "Helvetica Neue", Arial, sans-serif; }
+  header .contact span { white-space: nowrap; }
+  header .contact .sep { margin: 0 7px; color: var(--rule); }
+
+  /* Sections */
+  section { margin-bottom: 18px; }
+  h2 {
+    font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--accent); border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px; margin: 0 0 10px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .entry { margin-bottom: 13px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .entry-head .left { font-weight: bold; }
+  .entry-head .right { color: var(--muted); font-size: 12.5px; white-space: nowrap; font-family: "Helvetica Neue", Arial, sans-serif; }
+  .entry .sub { font-style: italic; color: var(--muted); font-size: 13px; margin: 1px 0 4px; }
+  .role-block { margin: 7px 0 3px; font-weight: bold; font-size: 13.5px; color: var(--accent); }
+
+  ul { margin: 5px 0 0; padding-left: 18px; }
+  li { margin-bottom: 3px; }
+  li::marker { color: var(--accent); }
+
+  .pub { padding-left: 22px; text-indent: -22px; margin-bottom: 6px; }
+  .pub .me { text-decoration: underline; }
+  .tag { display: inline-block; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10.5px;
+         background: var(--accent); color: #fff; padding: 1px 6px; border-radius: 3px; vertical-align: middle; }
+
+  .skills-row { display: flex; gap: 8px; margin-bottom: 4px; }
+  .skills-row .k { flex: 0 0 130px; font-weight: bold; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5px; }
+  .skills-row .v { flex: 1; }
+
+  /* Placeholder highlight — remove .todo styling once filled */
+  .todo { background: var(--todo-bg); color: var(--todo-ink); padding: 0 3px; border-radius: 2px; font-style: normal; }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  @media print {
+    body { background: #fff; font-size: 11.5px; }
+    .page { margin: 0; box-shadow: none; max-width: 100%; padding: 0 14mm; }
+    .todo { background: #fff3cd; }   /* keep visible while drafting; clear placeholders before final print */
+    .no-print { display: none; }
+  }
+  .hint { max-width: var(--maxw); margin: 0 auto 4px; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12px; color: #777; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <h1>Wanxiang Yu</h1>
+    <div class="contact">
+      <span class="todo">email@example.com</span><span class="sep">·</span>
+      <span class="todo">+86 xxx-xxxx-xxxx</span><span class="sep">·</span>
+      <span>github.com/<span class="todo">username</span></span><span class="sep">·</span>
+      <span class="todo">personal-site.com</span><span class="sep">·</span>
+      <span>Tianjin, China</span>
+    </div>
+  </header>
+
+  <!-- EDUCATION -->
+  <section>
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="left">Nankai University — College of Software</span>
+        <span class="right"><span class="todo">2023</span> – <span class="todo">2026 (expected)</span></span>
+      </div>
+      <div class="sub"><span class="todo">M.Eng. / M.Sc.</span> in Software Engineering · Advisor: Prof. Rui Chen</div>
+      <ul>
+        <li>GPA: <span class="todo">X.XX / 4.0</span> &nbsp;(Rank <span class="todo">X / N</span>, top <span class="todo">X%</span>)</li>
+        <li>Coursework: <span class="todo">Machine Learning, Distributed Systems, Algorithms, …</span></li>
+        <li><span class="todo">Honors / Scholarships</span></li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="left">Nankai University</span>
+        <span class="right"><span class="todo">2019</span> – <span class="todo">2023</span></span>
+      </div>
+      <div class="sub"><span class="todo">B.Eng. / B.Sc.</span> in <span class="todo">专业</span> · GPA <span class="todo">X.XX</span></div>
+    </div>
+  </section>
+
+  <!-- RESEARCH INTERESTS -->
+  <section>
+    <h2>Research Interests</h2>
+    <p style="margin:0;"><span class="todo">Large Language Models for software engineering · retrieval-augmented generation · multi-agent systems · ML systems &amp; infrastructure</span></p>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section>
+    <h2>Publications</h2>
+    <div class="pub">
+      Bin Lu, <span class="me">Wanxiang Yu</span>, Haolin Wang, Jiayi Zhao, Yuzhi Zhang, and Rui Chen.
+      &ldquo;<strong>CoMRA: A Framework for Automated Code Migration via Retrieval-Augmented Generation and Multi-Agent Collaboration</strong>.&rdquo;
+      In <em>Proc. 2026 IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)</em>, 2026.
+      DOI: 10.1109/SANER67736.2026.00022. &nbsp;<span class="tag">CCF-B</span>
+    </div>
+    <ul>
+      <li>Proposed CoMRA, combining <strong>retrieval-augmented generation (RAG)</strong> for knowledge-enhanced code understanding with a <strong>multi-agent workflow</strong> for coordinated task execution.</li>
+      <li>Achieved <strong>98% conversion accuracy</strong> on a Qt4→Qt5 benchmark of <strong>194 independently compilable programs</strong>, substantially outperforming general-purpose LLM baselines (56–84%).</li>
+      <li>Validated cross-ecosystem generalization via Python 2→3 and Java 8→17 migration case studies.</li>
+      <li>As <strong>primary contributor and main implementer</strong>: designed the detection/migration/verification multi-agent workflow with a compile–feedback–repair closed loop, built the RAG migration knowledge base, and constructed the evaluation benchmark and experiments.</li>
+    </ul>
+  </section>
+
+  <!-- INTERNSHIP -->
+  <section>
+    <h2>Internship Experience</h2>
+
+    <!-- Shopee -->
+    <div class="entry">
+      <div class="entry-head">
+        <span class="left">Shopee — LLM Infrastructure / AI Platform Engineering Intern</span>
+        <span class="right"><span class="todo">City</span> · <span class="todo">Jun 2025 – Sep 2025</span></span>
+      </div>
+      <div class="sub">Built core backend for <strong>Astrolabe</strong>, the internal ML experiment-management platform, and independently owned modules of the <strong>LLM Gateway</strong> (unified enterprise LLM API gateway).</div>
+
+      <div class="role-block">ML Training Platform (Astrolabe / Compass-Tuning)</div>
+      <ul>
+        <li>Designed and built the <strong>Megatron training Docker image</strong> and a <strong>6-stage pipeline</strong> (download → convert → train → export → upload → cleanup) supporting multi-node, multi-GPU distributed SFT/CPT/LoRA training.</li>
+        <li>Implemented a <strong>RankCoordinator</strong> using a strategy-pattern execution model (<code>RANK_0_ONLY</code> / <code>ALL_RANKS</code> / <code>RANK_0_IF_SINGLE_MP</code>) and a lightweight <strong>file-based barrier</strong> over shared storage for inter-node sync, with a 2-hour timeout guard for 70B+ model downloads — eliminating deadlocks without extra message-queue infra.</li>
+        <li>Built <strong>real-time log streaming + LLM-powered failure diagnosis</strong>: bridged AIS Pod-log <strong>WebSocket → SSE</strong> in FastAPI and streamed LLM analysis via a thread-pool/queue, producing structured root-cause and actionable fixes.</li>
+        <li>Designed a <strong>layered config-validation system</strong> (25+ hard constraints, 6 warnings, 5 hints) for Megatron YAML configs to reject invalid jobs before GPU allocation, saving wasted compute.</li>
+      </ul>
+
+      <div class="role-block">LLM Gateway — Prompts Module &amp; Pricing Agent (independent owner)</div>
+      <ul>
+        <li>Built an end-to-end <strong>AI prompt-management service</strong> (data model, RESTful API, versioning, dual-format rendering) from scratch in <strong>Go (GORM)</strong>; ensured correctness/perf via transactional consistency, optimistic version allocation with 409-retry, <strong>Redis caching + cursor pagination</strong>, and batch queries cutting list calls from <strong>2N+1 → 3</strong>.</li>
+        <li>Built an <strong>autonomous pricing agent</strong> (Playwright + <strong>ReAct</strong> loop) that scrapes vendors' official pricing pages and syncs production MDX docs, with a <strong>multi-layer anti-hallucination system</strong> (closed-set whitelist prompting, code-level validation, <code>temperature=0</code>, source-text verification, 2-round self-correction with rollback) guaranteeing every published price is source-traceable.</li>
+      </ul>
+    </div>
+
+    <!-- Tencent -->
+    <div class="entry">
+      <div class="entry-head">
+        <span class="left">Tencent (Weishi Product Center) — Recommendation Architecture / Ad Eng. Intern</span>
+        <span class="right"><span class="todo">City</span> · <span class="todo">Mon Year – Mon Year</span></span>
+      </div>
+      <div class="sub">Worked on the in-feed <strong>ad monetization recall &amp; re-ranking (mixed-ranking)</strong> stack across three production services (C++ / Go on the tRPC framework).</div>
+      <ul>
+        <li>Contributed to <strong>advert_ips</strong>, the ad recall &amp; mixed-ranking decision engine: developed <strong>DAG operators</strong> (ispine/didagle) for SSP ad recall, user-feature extraction, and rule-driven <strong>slot strategy</strong> (ad first-position / interval / frequency control).</li>
+        <li>Worked on the <strong>policy</strong> service's <strong>re-ranking pipeline</strong> — a Handler-based chain-of-responsibility flow covering multi-objective scoring, weighting, ranking, AMS eCPM re-estimation, frequency control, and eCPM-twiddle filtering; fusion coefficients computed per-user via an <strong>Evolution-Strategy (ES)</strong> model with graceful fallback.</li>
+        <li>Contributed to the <strong>Supply Side Platform (SSP)</strong> service (Go/tRPC): DAG-orchestrated request filtering → AMS recall → ad filtering → slot allocation, driven by an <strong>mdb rule engine</strong> with hot-reloadable configs (Rainbow config center) across scenes.</li>
+        <li>Tech: C++17 / Go, tRPC, Bazel, Protocol Buffers, Redis, Kafka, MySQL, OpenTelemetry.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <h2>Technical Skills</h2>
+    <div class="skills-row"><div class="k">Languages</div><div class="v">C++ (17), Go, Python<span class="todo">, Java</span></div></div>
+    <div class="skills-row"><div class="k">ML / LLM</div><div class="v">Megatron, PyTorch, distributed training (multi-node/GPU), RAG, multi-agent systems, ReAct, prompt engineering</div></div>
+    <div class="skills-row"><div class="k">Systems / Infra</div><div class="v">Docker, Bazel, FastAPI, GORM, Redis, MySQL, Kafka, tRPC, OpenTelemetry</div></div>
+    <div class="skills-row"><div class="k">Tools</div><div class="v">Git, Linux, LaTeX</div></div>
+  </section>
+
+  <!-- HONORS / LANGUAGES -->
+  <section>
+    <h2>Honors &amp; Languages</h2>
+    <ul>
+      <li><strong>Awards:</strong> <span class="todo">奖学金 / 竞赛 / 荣誉</span></li>
+      <li><strong>Languages:</strong> Chinese (native); English — TOEFL/IELTS <span class="todo">score</span>, GRE <span class="todo">score</span></li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
