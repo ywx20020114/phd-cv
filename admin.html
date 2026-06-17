@@ -71,14 +71,16 @@
   <h1>✎ 简历管理入口</h1>
   <button class="btn-ghost" onclick="loadFromData()">↺ 重置为已发布内容</button>
   <a class="btn-ghost" href="index.html" target="_blank">👁 预览</a>
-  <button class="btn-primary" onclick="exportData()">⬇ 导出 cv-data.js</button>
+  <button class="btn-ghost" onclick="openTokenDlg()">🔑 设置 Token</button>
+  <button class="btn-ghost" onclick="exportData()">⬇ 导出文件</button>
+  <button class="btn-primary" onclick="publish()">🚀 保存并发布到线上</button>
 </div>
 
 <div class="wrap">
   <div class="note">
-    <strong>使用说明：</strong>在下面表单里修改内容 → 点 <strong>保存草稿</strong> 实时预览（草稿存在本浏览器，不会上线）→
-    满意后点右上角 <strong>导出 cv-data.js</strong>，把内容覆盖仓库里的 <code>cv-data.js</code> 文件并推送，几十秒后线上简历自动更新。<br>
-    <span class="hint">提示：GitHub Pages 是静态托管，没有服务器后端，所以"发布上线"这一步需要替换 cv-data.js 文件（导出弹窗里给了一键复制和操作指引）。</span>
+    <strong>一键发布：</strong>修改内容后，直接点右上角 <strong>🚀 保存并发布到线上</strong>，约 1 分钟后线上简历自动更新，无需手动复制或 push。<br>
+    首次使用需点 <strong>🔑 设置 Token</strong> 填入 GitHub Personal Access Token（仅存在本浏览器，用于把改动提交回你的仓库）。<br>
+    <span class="hint">想本地预览不上线，可用 <strong>💾 保存草稿并预览</strong>；想手动处理可用 <strong>⬇ 导出文件</strong>。</span>
   </div>
 
   <form id="form"></form>
@@ -99,6 +101,38 @@
     <button class="btn-ghost" style="background:#ddd;color:#333;" onclick="document.getElementById('exportDlg').close()">关闭</button>
     <button class="btn-primary" onclick="copyExport()">📋 复制全部</button>
     <button class="btn-primary" onclick="downloadExport()">⬇ 下载文件</button>
+  </footer>
+</dialog>
+
+<dialog id="tokenDlg">
+  <header>🔑 设置 GitHub Token</header>
+  <div class="body">
+    <p style="margin:0 0 10px; font-size:13px; line-height:1.6;">
+      一键发布需要一个有写权限的 GitHub Token。生成步骤：<br>
+      1. 打开 <a href="https://github.com/settings/tokens?type=beta" target="_blank">Fine-grained tokens</a>（推荐）→ Generate new token<br>
+      2. <strong>Repository access</strong> 选 Only select repositories → 勾选 <code>phd-cv</code><br>
+      3. <strong>Permissions → Contents</strong> 设为 <strong>Read and write</strong><br>
+      4. 生成后复制粘贴到下方。<span class="hint">Token 只保存在本浏览器 localStorage，不会上传。</span>
+    </p>
+    <label>Personal Access Token</label>
+    <input type="password" id="tokenInput" placeholder="github_pat_... 或 ghp_..." style="width:100%; padding:9px 11px; border:1px solid #cbd2db; border-radius:6px; font-family:monospace; font-size:13px;">
+    <label style="margin-top:12px;">提交信息 (commit message，可选)</label>
+    <input type="text" id="commitMsg" placeholder="Update CV content" style="width:100%; padding:8px 10px; border:1px solid #cbd2db; border-radius:6px; font-size:13px;">
+  </div>
+  <footer>
+    <button class="btn-danger" onclick="clearToken()">删除已存 Token</button>
+    <button class="btn-ghost" style="background:#ddd;color:#333;" onclick="document.getElementById('tokenDlg').close()">取消</button>
+    <button class="btn-primary" onclick="saveToken()">保存 Token</button>
+  </footer>
+</dialog>
+
+<dialog id="publishDlg">
+  <header>🚀 发布到线上</header>
+  <div class="body">
+    <div id="publishStatus" style="font-size:14px; line-height:1.8;"></div>
+  </div>
+  <footer>
+    <button class="btn-ghost" style="background:#ddd;color:#333;" onclick="document.getElementById('publishDlg').close()">关闭</button>
   </footer>
 </dialog>
 
@@ -325,6 +359,112 @@ function downloadExport(){
   var blob=new Blob([buildFileText()],{type:"text/javascript"});
   var a=el("a"); a.href=URL.createObjectURL(blob); a.download="cv-data.js"; a.click();
   URL.revokeObjectURL(a.href); toast("已下载 cv-data.js");
+}
+
+/* ---------- GitHub 一键发布 ---------- */
+var GH = { owner: "ywx20020114", repo: "phd-cv", path: "cv-data.js", branch: "main" };
+
+function getToken(){ return localStorage.getItem("ghToken") || ""; }
+function openTokenDlg(){
+  document.getElementById("tokenInput").value = getToken();
+  document.getElementById("commitMsg").value = localStorage.getItem("ghCommitMsg") || "";
+  document.getElementById("tokenDlg").showModal();
+}
+function saveToken(){
+  var t = document.getElementById("tokenInput").value.trim();
+  if (!t){ toast("Token 不能为空"); return; }
+  localStorage.setItem("ghToken", t);
+  localStorage.setItem("ghCommitMsg", document.getElementById("commitMsg").value.trim());
+  document.getElementById("tokenDlg").close();
+  toast("Token 已保存到本浏览器");
+}
+function clearToken(){
+  localStorage.removeItem("ghToken");
+  document.getElementById("tokenInput").value = "";
+  toast("已删除本地 Token");
+}
+
+// UTF-8 安全的 base64 编码
+function b64encode(str){
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+function setStatus(html){ document.getElementById("publishStatus").innerHTML = html; }
+
+async function publish(){
+  var token = getToken();
+  if (!token){
+    toast("请先设置 Token");
+    openTokenDlg();
+    return;
+  }
+  // 发布前先把当前编辑同步为草稿（保持预览一致）
+  localStorage.setItem("cvDraft", JSON.stringify(DATA));
+
+  var dlg = document.getElementById("publishDlg");
+  dlg.showModal();
+  setStatus("⏳ 正在读取仓库当前文件…");
+
+  var apiBase = "https://api.github.com/repos/" + GH.owner + "/" + GH.repo + "/contents/" + GH.path;
+  var headers = {
+    "Authorization": "Bearer " + token,
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28"
+  };
+
+  try {
+    // 1) 取当前文件 sha（更新已存在文件必须带 sha）
+    var sha = null;
+    var getRes = await fetch(apiBase + "?ref=" + GH.branch, { headers: headers });
+    if (getRes.status === 200){
+      var info = await getRes.json();
+      sha = info.sha;
+    } else if (getRes.status === 404){
+      sha = null; // 文件不存在则创建
+    } else if (getRes.status === 401){
+      throw new Error("Token 无效或已过期（401）。请重新设置 Token。");
+    } else if (getRes.status === 403){
+      throw new Error("权限不足（403）。请确认 Token 对 phd-cv 仓库有 Contents: Read and write 权限。");
+    } else {
+      throw new Error("读取文件失败，HTTP " + getRes.status);
+    }
+
+    // 2) PUT 提交新内容
+    setStatus("⏳ 正在提交新内容到 GitHub…");
+    var msg = (localStorage.getItem("ghCommitMsg") || "").trim() || "Update CV via admin editor";
+    var body = {
+      message: msg,
+      content: b64encode(buildFileText()),
+      branch: GH.branch
+    };
+    if (sha) body.sha = sha;
+
+    var putRes = await fetch(apiBase, {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(body)
+    });
+
+    if (putRes.status === 200 || putRes.status === 201){
+      var pagesUrl = "https://" + GH.owner + ".github.io/" + GH.repo + "/";
+      setStatus(
+        "✅ <strong>提交成功！</strong><br><br>" +
+        "GitHub Actions 正在自动部署，约 <strong>1 分钟</strong> 后线上生效。<br><br>" +
+        "🔗 简历：<a href='" + pagesUrl + "' target='_blank'>" + pagesUrl + "</a><br>" +
+        "📊 部署进度：<a href='https://github.com/" + GH.owner + "/" + GH.repo + "/actions' target='_blank'>查看 Actions</a><br><br>" +
+        "<span class='hint'>提交成功后已自动清除本地草稿（线上即将与编辑内容一致）。</span>"
+      );
+      localStorage.removeItem("cvDraft");
+      toast("已发布到线上 🎉");
+    } else {
+      var err = await putRes.json().catch(function(){return {};});
+      throw new Error("提交失败，HTTP " + putRes.status + "：" + (err.message || "未知错误"));
+    }
+  } catch (e){
+    setStatus("❌ <strong>发布失败</strong><br><br>" + (e.message || e) +
+      "<br><br><span class='hint'>你仍可用『⬇ 导出文件』手动处理。</span>");
+    toast("发布失败");
+  }
 }
 </script>
 </body>

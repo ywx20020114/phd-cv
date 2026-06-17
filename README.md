@@ -18,15 +18,18 @@ Data-driven single-page CV with a built-in visual editor, auto-deployed to GitHu
 
 ## How to edit your CV
 
-### Option A — Visual editor (recommended)
-1. Open `admin.html` (locally or the live URL).
+### Option A — Visual editor with one-click publish (recommended)
+1. Open the CV page and click the floating **✎ 编辑简历** button (or open `admin.html`).
 2. Edit any field in the form.
-3. Click **保存草稿并预览** to preview instantly (draft is stored in your browser only).
-4. When happy, click **导出 cv-data.js** → copy/download the content.
-5. Replace `cv-data.js` in the repo with it, commit & push. The site updates automatically.
+3. First time only: click **🔑 设置 Token** and paste a GitHub token
+   (Fine-grained token with **Contents: Read and write** on the `phd-cv` repo).
+   The token is stored only in your browser's localStorage.
+4. Click **🚀 保存并发布到线上** — the editor commits `cv-data.js` back to the repo via
+   the GitHub API, the deploy workflow runs automatically, and the site updates in ~1 min.
+   No manual copy/paste or `git push` needed.
 
-> GitHub Pages is static hosting (no backend), so "publishing" = replacing the
-> `cv-data.js` file. The editor's export dialog gives you one-click copy/download.
+> Want to preview without publishing? Use **💾 保存草稿并预览** (browser-only draft).
+> Prefer manual control? Use **⬇ 导出文件** to copy/download `cv-data.js` yourself.
 
 ### Option B — Edit the file directly
 Edit `cv-data.js` by hand and push. Empty string `""` fields are hidden automatically.
