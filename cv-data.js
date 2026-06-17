@@ -12,7 +12,7 @@ window.CV_DATA = {
     "website": "",
     "location": ""
   },
-  "summary": "Master's student in Software Engineering at Nankai University with a first-author-level research contribution on LLM-based automated code migration (SANER 2026). Industry experience spanning LLM training infrastructure, agentic LLM systems, and large-scale recommendation/advertising architecture at Shopee and Tencent. Interested in pursuing a PhD on language models for software engineering and reliable ML systems.",
+  "summary": "",
   "interests": [
     "Large Language Models for software engineering",
     "Retrieval-augmented generation (RAG)",
@@ -59,24 +59,12 @@ window.CV_DATA = {
       ]
     }
   ],
-  "research": [
-    {
-      "title": "Automated Code Migration via RAG + Multi-Agent Collaboration (CoMRA)",
-      "org": "Nankai University · Advisor: Prof. Rui Chen",
-      "date": "20XX – 20XX",
-      "bullets": [
-        "Primary contributor and main implementer of the framework (accepted at SANER 2026).",
-        "Designed a multi-agent migration pipeline (detection → migration → verification) with a closed-loop compile–feedback–repair mechanism that iteratively fixes migration errors.",
-        "Built a structured RAG migration knowledge base from multi-source Qt documentation to ground LLM generation and suppress hallucination / version drift.",
-        "Constructed a 194-program Qt4→Qt5 benchmark, ran the full evaluation, and extended validation to Python 2→3 and Java 8→17."
-      ]
-    }
-  ],
+  "research": [],
   "experience": [
     {
       "org": "Shopee",
       "role": "LLM Infrastructure / AI Platform Engineering Intern",
-      "location": "[City]",
+      "location": "Beijing",
       "date": "[Jun 2025 – Sep 2025]",
       "summary": "Built core backend for Astrolabe, the internal ML experiment-management platform, and independently owned modules of the LLM Gateway (unified enterprise LLM API gateway).",
       "groups": [
@@ -101,7 +89,7 @@ window.CV_DATA = {
     {
       "org": "Tencent (Weishi Product Center)",
       "role": "Recommendation Architecture / Ad Engineering Intern",
-      "location": "[City]",
+      "location": "Beijing",
       "date": "[Mon Year – Mon Year]",
       "summary": "Worked on the in-feed ad monetization recall & re-ranking (mixed-ranking) stack across three production services (C++ / Go on the tRPC framework).",
       "groups": [
