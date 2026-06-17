@@ -58,12 +58,12 @@
   li { margin-bottom: 3px; }
   li::marker { color: var(--accent); }
 
-  .pub { padding-left: 22px; text-indent: -22px; margin-bottom: 6px; }
+  .pub { padding-left: 22px; text-indent: -22px; margin-bottom: 6px; line-height: 1.6; }
   .pub .me { text-decoration: underline; }
   .tag { display: inline-block; font-family: "Helvetica Neue", Arial, sans-serif;
-         font-size: 10px; font-weight: 700; letter-spacing: .5px; line-height: 1.4;
-         background: var(--accent); color: #fff; padding: 1px 7px; border-radius: 10px;
-         vertical-align: 1px; white-space: nowrap; }
+         font-size: 9.5px; font-weight: 700; letter-spacing: .5px; line-height: 1;
+         background: var(--accent); color: #fff; padding: 3px 7px; border-radius: 4px;
+         vertical-align: baseline; white-space: nowrap; margin-left: 5px; }
 
   .skills-row { display: flex; gap: 8px; margin-bottom: 4px; }
   .skills-row .k { flex: 0 0 130px; font-weight: bold; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5px; }
@@ -188,7 +188,7 @@ function renderCV() {
       h += "<div class='pub'>" + authors + ". &ldquo;<strong>" + esc(p.title) + "</strong>.&rdquo; <em>" +
            esc(p.venue) + "</em>, " + esc(p.year) + ".";
       if (p.doi) h += " DOI: " + esc(p.doi) + ".";
-      if (p.tag) h += " &nbsp;<span class='tag'>" + esc(p.tag) + "</span>";
+      if (p.tag) h += "<span class='tag'>" + esc(p.tag) + "</span>";
       h += "</div>";
       h += ulist(p.bullets);
     });
