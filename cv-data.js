@@ -5,7 +5,7 @@
 window.CV_DATA = {
   "basics": {
     "name": "Wanxiang Yu",
-    "headline": "PhD Applicant · LLM for Software Engineering / ML Systems",
+    "headline": "",
     "email": "onexiangg.yu@gmail.com",
     "phone": "19815840515",
     "github": "",
@@ -65,7 +65,7 @@ window.CV_DATA = {
       "org": "Shopee",
       "role": "LLM Infrastructure / AI Platform Engineering Intern",
       "location": "Beijing",
-      "date": "[Jun 2025 – Sep 2025]",
+      "date": "Jun 2025 – May 2026",
       "summary": "Built core backend for Astrolabe, the internal ML experiment-management platform, and independently owned modules of the LLM Gateway (unified enterprise LLM API gateway).",
       "groups": [
         {
@@ -90,7 +90,7 @@ window.CV_DATA = {
       "org": "Tencent (Weishi Product Center)",
       "role": "Recommendation Architecture / Ad Engineering Intern",
       "location": "Beijing",
-      "date": "[Mon Year – Mon Year]",
+      "date": "May 2026 – Sep 2026",
       "summary": "Worked on the in-feed ad monetization recall & re-ranking (mixed-ranking) stack across three production services (C++ / Go on the tRPC framework).",
       "groups": [
         {
@@ -98,8 +98,7 @@ window.CV_DATA = {
           "bullets": [
             "Contributed to advert_ips, the ad recall & mixed-ranking decision engine: developed DAG operators (ispine/didagle) for SSP ad recall, user-feature extraction, and rule-driven slot strategy (ad first-position / interval / frequency control).",
             "Worked on the policy service's re-ranking pipeline — a Handler-based chain-of-responsibility flow covering multi-objective scoring, weighting, ranking, AMS eCPM re-estimation, frequency control, and eCPM-twiddle filtering; fusion coefficients computed per-user via an Evolution-Strategy (ES) model with graceful fallback.",
-            "Contributed to the Supply Side Platform (SSP) service (Go/tRPC): DAG-orchestrated request filtering → AMS recall → ad filtering → slot allocation, driven by an mdb rule engine with hot-reloadable configs (Rainbow config center) across scenes.",
-            "Tech: C++17 / Go, tRPC, Bazel, Protocol Buffers, Redis, Kafka, MySQL, OpenTelemetry."
+            "Contributed to the Supply Side Platform (SSP) service (Go/tRPC): DAG-orchestrated request filtering → AMS recall → ad filtering → slot allocation, driven by an mdb rule engine with hot-reloadable configs (Rainbow config center) across scenes."
           ]
         }
       ]
