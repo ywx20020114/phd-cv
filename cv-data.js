@@ -9,7 +9,7 @@ window.CV_DATA = {
     "email": "onexiangg.yu@gmail.com",
     "phone": "19815840515",
     "github": "",
-    "website": "https://ywx20020114.github.io/phd-cv",
+    "website": "",
     "location": ""
   },
   "summary": "Master's student in Software Engineering at Nankai University with a first-author-level research contribution on LLM-based automated code migration (SANER 2026). Industry experience spanning LLM training infrastructure, agentic LLM systems, and large-scale recommendation/advertising architecture at Shopee and Tencent. Interested in pursuing a PhD on language models for software engineering and reliable ML systems.",
