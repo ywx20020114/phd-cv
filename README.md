@@ -1,42 +1,34 @@
 # PhD Application CV — Wanxiang Yu
 
-Data-driven single-page CV with a built-in visual editor, auto-deployed to GitHub Pages.
+A single-page **live CV builder**: edit on the left, see the rendered CV update in real time on the right, then save as PDF. Auto-deployed to GitHub Pages.
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `index.html` | The CV page. Renders from `cv-data.js`. |
-| `cv-data.js` | **All CV content lives here** (the single source of truth). |
-| `admin.html` | Visual editor ("管理入口") — edit content in a form, preview, export. |
+| `index.html` | The live editor + real-time CV preview, all in one page. |
+| `cv-data.js` | Built-in **default/seed content** loaded on first visit. |
 | `.github/workflows/deploy.yml` | Auto-deploys to GitHub Pages on every push to `main`. |
 
-## Live URLs (after Pages is enabled)
+## Live URL (after Pages is enabled)
 
-- CV:    `https://ywx20020114.github.io/phd-cv/`
-- Editor: `https://ywx20020114.github.io/phd-cv/admin.html`
+- `https://ywx20020114.github.io/phd-cv/`
 
-## How to edit your CV
+## Features
 
-### Option A — Visual editor with one-click publish (recommended)
-1. Open the CV page and click the floating **✎ 编辑简历** button (or open `admin.html`).
-2. Edit any field in the form.
-3. First time only: click **🔑 设置 Token** and paste a GitHub token
-   (Fine-grained token with **Contents: Read and write** on the `phd-cv` repo).
-   The token is stored only in your browser's localStorage.
-4. Click **🚀 保存并发布到线上** — the editor commits `cv-data.js` back to the repo via
-   the GitHub API, the deploy workflow runs automatically, and the site updates in ~1 min.
-   No manual copy/paste or `git push` needed.
+- **Live two-pane editing** — left: Chinese-labeled form; right: rendered English CV that updates as you type.
+- **Avatar upload** (optional) — stored inline as base64; toggle a centered header layout.
+- **Flexible sections** — every standard section (Summary, Education, Publications, Research, Experience, Skills, Honors) can be shown/hidden and its items reordered (↑/↓) or removed.
+- **Custom sections** — add your own sections (bullet list or paragraph) with any title.
+- **Save as PDF** — click **🖨 保存为 PDF**; print styles hide the editor and print only the CV (A4).
+- **Backup & restore** — **⬇ 导出 JSON** / **⬆ 导入 JSON**. **↺ 恢复默认** reloads the seed content.
 
-> Want to preview without publishing? Use **💾 保存草稿并预览** (browser-only draft).
-> Prefer manual control? Use **⬇ 导出文件** to copy/download `cv-data.js` yourself.
+## Where is my data stored?
 
-### Option B — Edit the file directly
-Edit `cv-data.js` by hand and push. Empty string `""` fields are hidden automatically.
-
-## Export to PDF
-Open `index.html` in a browser → Print (Cmd/Ctrl + P) → Save as PDF. Print styles
-hide the floating "Edit" button and draft banner automatically.
+All edits are saved automatically in your browser's `localStorage` (no backend, no token).
+To move between machines or keep a backup, use **导出 JSON** / **导入 JSON**.
+To change the built-in default everyone sees on first load, edit `cv-data.js` and push.
 
 ## Local preview
+
 Just open `index.html` in a browser — no build step or dependencies.

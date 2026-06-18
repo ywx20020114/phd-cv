@@ -3,249 +3,481 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wanxiang Yu — CV</title>
+<title>CV Builder — Live Editor</title>
 <style>
-  :root {
-    --ink: #1a1a1a;
-    --muted: #5c5c5c;
-    --accent: #1f4e79;
-    --rule: #d0d0d0;
-    --maxw: 820px;
+  :root{
+    --ink:#1a1a1a; --muted:#5c5c5c; --accent:#1f4e79; --rule:#d0d0d0; --maxw:820px;
+    --bg:#eef1f5; --panel:#fff; --line:#d4dae2;
   }
-  * { box-sizing: border-box; }
-  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body {
-    margin: 0;
-    font-family: "Georgia", "Times New Roman", "Songti SC", serif;
-    color: var(--ink);
-    line-height: 1.45;
-    font-size: 14px;
-    background: #f4f4f4;
-  }
-  .page {
-    max-width: var(--maxw);
-    margin: 24px auto;
-    background: #fff;
-    padding: 44px 52px 52px;
-    box-shadow: 0 1px 8px rgba(0,0,0,.12);
-  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{margin:0;font-family:"Helvetica Neue",-apple-system,"PingFang SC",Arial,sans-serif;
+       background:var(--bg);color:var(--ink);font-size:14px;}
 
-  header { text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 14px; margin-bottom: 18px; }
-  header h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: 1px; }
-  header .headline { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 7px; }
-  header .contact { font-size: 12.5px; color: var(--muted); font-family: "Helvetica Neue", Arial, sans-serif; }
-  header .contact .sep { margin: 0 7px; color: var(--rule); }
+  /* ---------- Layout ---------- */
+  .topbar{position:sticky;top:0;z-index:30;background:var(--accent);color:#fff;
+          padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+          box-shadow:0 2px 6px rgba(0,0,0,.2);}
+  .topbar h1{font-size:15px;margin:0;margin-right:auto;font-weight:600;}
+  .topbar button,.topbar label.btn{font-size:13px;padding:7px 12px;border:0;border-radius:6px;
+          cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;}
+  .btn-primary{background:#ffc845;color:#3a2e00;font-weight:600;}
+  .btn-ghost{background:rgba(255,255,255,.15);color:#fff;}
+  .btn-danger{background:#c0392b;color:#fff;}
 
-  section { margin-bottom: 18px; }
-  h2 {
-    font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--accent); border-bottom: 1px solid var(--rule);
-    padding-bottom: 3px; margin: 0 0 10px;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+  .layout{display:flex;gap:0;height:calc(100vh - 51px);}
+  .editor{flex:0 0 46%;max-width:560px;overflow-y:auto;padding:18px 20px 120px;
+          border-right:1px solid var(--line);background:var(--bg);}
+  .preview-wrap{flex:1;overflow-y:auto;background:#9aa3ad;padding:24px;}
+
+  @media(max-width:880px){
+    .layout{flex-direction:column;height:auto;}
+    .editor{flex:none;max-width:none;width:100%;border-right:0;border-bottom:1px solid var(--line);}
+    .preview-wrap{padding:14px;}
   }
 
-  .summary { margin: 0; text-align: justify; }
+  /* ---------- Editor form ---------- */
+  fieldset{border:1px solid var(--line);border-radius:10px;margin:0 0 16px;padding:10px 14px 16px;background:var(--panel);}
+  legend{font-weight:700;color:var(--accent);padding:0 8px;font-size:14px;display:flex;align-items:center;gap:8px;}
+  legend .toggle{font-size:11px;font-weight:500;color:#888;cursor:pointer;user-select:none;}
+  label{display:block;font-size:12px;color:#555;margin:9px 0 3px;font-weight:600;}
+  input[type=text],textarea,select{width:100%;padding:7px 9px;border:1px solid #cbd2db;border-radius:6px;
+        font-family:inherit;font-size:13px;background:#fcfdff;}
+  textarea{resize:vertical;line-height:1.5;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .row>div{flex:1;min-width:150px;}
+  .card{border:1px dashed #c3ccd6;border-radius:8px;padding:11px;margin:11px 0;background:#fafbfd;position:relative;}
+  .card .card-title{font-weight:700;color:#444;margin-bottom:2px;font-size:12.5px;}
+  .card .cbtns{position:absolute;right:8px;top:8px;display:flex;gap:4px;}
+  .card .cbtns button{border:0;border-radius:5px;padding:2px 7px;cursor:pointer;font-size:12px;line-height:1.4;}
+  .mv{background:#dde6f0;color:#1f4e79;}
+  .rm{background:#f0c0bb;color:#8a1c0e;}
+  .add-btn{background:#e3edf7;color:var(--accent);border:0;border-radius:6px;padding:7px 12px;cursor:pointer;font-size:13px;font-weight:600;}
+  .hint{font-size:11px;color:#888;margin-top:2px;}
+  .avatar-row{display:flex;align-items:center;gap:14px;margin-top:6px;}
+  .avatar-prev{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--line);background:#e7ebf0;}
+  .sec-hidden{opacity:.5;}
 
-  .entry { margin-bottom: 13px; }
-  .entry:last-child { margin-bottom: 0; }
-  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .entry-head .left { font-weight: bold; }
-  .entry-head .right { color: var(--muted); font-size: 12.5px; white-space: nowrap; font-family: "Helvetica Neue", Arial, sans-serif; }
-  .entry .sub { font-style: italic; color: var(--muted); font-size: 13px; margin: 1px 0 4px; }
-  .role-block { margin: 7px 0 3px; font-weight: bold; font-size: 13.5px; color: var(--accent); }
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2c7a3f;color:#fff;
+         padding:9px 18px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:200;}
+  .toast.show{opacity:1;}
 
-  ul { margin: 5px 0 0; padding-left: 18px; }
-  li { margin-bottom: 3px; }
-  li::marker { color: var(--accent); }
+  /* ---------- Rendered CV (A4 paper) ---------- */
+  .paper{max-width:var(--maxw);margin:0 auto;background:#fff;padding:44px 52px 52px;
+         box-shadow:0 2px 14px rgba(0,0,0,.25);
+         font-family:"Georgia","Times New Roman","Songti SC",serif;color:var(--ink);
+         line-height:1.45;font-size:14px;}
+  .cv-head{display:flex;align-items:center;gap:22px;border-bottom:2px solid var(--accent);
+           padding-bottom:14px;margin-bottom:18px;}
+  .cv-head.center{flex-direction:column;text-align:center;gap:8px;}
+  .cv-head .avatar{width:92px;height:92px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:1px solid var(--rule);}
+  .cv-head .htext{flex:1;}
+  .cv-head h1{font-size:30px;margin:0 0 4px;letter-spacing:1px;}
+  .cv-head .headline{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:6px;}
+  .cv-head .contact{font-size:12.5px;color:var(--muted);font-family:"Helvetica Neue",Arial,sans-serif;}
+  .cv-head .contact .sep{margin:0 7px;color:var(--rule);}
+  .paper section{margin-bottom:18px;}
+  .paper h2{font-size:14px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);
+            border-bottom:1px solid var(--rule);padding-bottom:3px;margin:0 0 10px;
+            font-family:"Helvetica Neue",Arial,sans-serif;}
+  .summary{margin:0;text-align:justify;}
+  .entry{margin-bottom:13px;}.entry:last-child{margin-bottom:0;}
+  .entry-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+  .entry-head .left{font-weight:bold;}
+  .entry-head .right{color:var(--muted);font-size:12.5px;white-space:nowrap;font-family:"Helvetica Neue",Arial,sans-serif;}
+  .entry .sub{font-style:italic;color:var(--muted);font-size:13px;margin:1px 0 4px;}
+  .role-block{margin:7px 0 3px;font-weight:bold;font-size:13.5px;color:var(--accent);}
+  .paper ul{margin:5px 0 0;padding-left:18px;}
+  .paper li{margin-bottom:3px;}
+  .paper li::marker{color:var(--accent);}
+  .pub{margin-bottom:8px;line-height:1.5;}
+  .pub .me{text-decoration:underline;}
+  .pub-authors{margin-bottom:1px;}
+  .pub-title{padding-left:18px;}
+  .skills-row{display:flex;gap:8px;margin-bottom:4px;}
+  .skills-row .k{flex:0 0 130px;font-weight:bold;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;}
+  .skills-row .v{flex:1;}
+  .paper a{color:var(--accent);text-decoration:none;}
 
-  .pub { margin-bottom: 6px; line-height: 1.5; }
-  .pub .me { text-decoration: underline; }
-  .pub-authors { margin-bottom: 1px; }
-  .pub-title { padding-left: 18px; }
-
-  .skills-row { display: flex; gap: 8px; margin-bottom: 4px; }
-  .skills-row .k { flex: 0 0 130px; font-weight: bold; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5px; }
-  .skills-row .v { flex: 1; }
-
-  a { color: var(--accent); text-decoration: none; }
-
-  /* floating admin link */
-  .admin-fab {
-    position: fixed; right: 18px; bottom: 18px;
-    background: var(--accent); color: #fff; padding: 9px 15px;
-    border-radius: 22px; font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 50;
-  }
-  .draft-banner {
-    max-width: var(--maxw); margin: 12px auto -8px; padding: 8px 14px;
-    background: #fff3cd; color: #8a6d00; border-radius: 6px;
-    font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5px;
-  }
-
-  @media print {
-    body { background: #fff; font-size: 11.5px; }
-    .page { margin: 0; box-shadow: none; max-width: 100%; padding: 0 14mm; }
-    .no-print { display: none !important; }
+  /* ---------- Print ---------- */
+  @media print{
+    body{background:#fff;}
+    .topbar,.editor,.toast{display:none !important;}
+    .layout{display:block;height:auto;}
+    .preview-wrap{overflow:visible;padding:0;background:#fff;}
+    .paper{box-shadow:none;margin:0;max-width:100%;padding:0 14mm;font-size:11.5px;}
+    @page{size:A4;margin:12mm;}
   }
 </style>
 </head>
 <body>
 
-<div id="draftBanner" class="draft-banner no-print" style="display:none;"></div>
-<div id="cv" class="page"></div>
-<a class="admin-fab no-print" href="admin.html">✎ Edit</a>
+<div class="topbar">
+  <h1>📝 CV Builder</h1>
+  <button class="btn-ghost" onclick="toggleEditor()" id="toggleBtn">👁 隐藏编辑栏</button>
+  <label class="btn btn-ghost">⬆ 导入 JSON<input type="file" accept="application/json,.json" onchange="importJSON(this)" style="display:none;"></label>
+  <button class="btn-ghost" onclick="exportJSON()">⬇ 导出 JSON</button>
+  <button class="btn-ghost" onclick="resetDefault()">↺ 恢复默认</button>
+  <button class="btn-primary" onclick="window.print()">🖨 保存为 PDF</button>
+</div>
+
+<div class="layout">
+  <div class="editor" id="editor"><form id="form"></form></div>
+  <div class="preview-wrap"><div id="cv" class="paper"></div></div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- default data -->
+<script src="cv-data.js"></script>
 
 <script>
-function renderCV() {
-  // localStorage draft takes priority (from admin.html edits); otherwise use cv-data.js
-  var draft = null;
-  try {
-    var raw = localStorage.getItem("cvDraft");
-    if (raw) draft = JSON.parse(raw);
-  } catch (e) {}
-  var data = draft || window.CV_DATA;
+/* ============================ helpers ============================ */
+function el(tag,attrs,html){var e=document.createElement(tag);
+  if(attrs)for(var k in attrs)e.setAttribute(k,attrs[k]);
+  if(html!=null)e.innerHTML=html;return e;}
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},1700);}
+function deepClone(o){return JSON.parse(JSON.stringify(o));}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-  if (draft) {
-    var b = document.getElementById("draftBanner");
-    b.style.display = "block";
-    b.innerHTML = "📝 Showing a local unsaved draft (from this browser). " +
-      "Open <a href='admin.html'>Edit</a> to export it into cv-data.js, " +
-      "or <a href='#' onclick=\"localStorage.removeItem('cvDraft');location.reload();return false;\">discard draft</a>.";
-  }
+var STORE_KEY="cvBuilderData";
 
-  function esc(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-  function ulist(arr) {
-    if (!arr || !arr.length) return "";
-    return "<ul>" + arr.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
-  }
-
-  var h = "";
-  var bx = data.basics || {};
-
-  // ---- Header ----
-  var contact = [];
-  if (bx.email)    contact.push("<span>" + esc(bx.email) + "</span>");
-  if (bx.phone)    contact.push("<span>" + esc(bx.phone) + "</span>");
-  if (bx.github)   contact.push("<span>github.com/" + esc(bx.github) + "</span>");
-  if (bx.website)  contact.push("<span>" + esc(bx.website) + "</span>");
-  if (bx.location) contact.push("<span>" + esc(bx.location) + "</span>");
-
-  h += "<header>";
-  h += "<h1>" + esc(bx.name) + "</h1>";
-  if (bx.headline) h += "<div class='headline'>" + esc(bx.headline) + "</div>";
-  h += "<div class='contact'>" + contact.join("<span class='sep'>·</span>") + "</div>";
-  h += "</header>";
-
-  // ---- Summary ----
-  if (data.summary) {
-    h += "<section><h2>Summary</h2><p class='summary'>" + esc(data.summary) + "</p></section>";
-  }
-
-  // ---- Education ----
-  if (data.education && data.education.length) {
-    h += "<section><h2>Education</h2>";
-    data.education.forEach(function (e) {
-      h += "<div class='entry'>";
-      h += "<div class='entry-head'><span class='left'>" + esc(e.school) +
-           "</span><span class='right'>" + esc(e.date) + "</span></div>";
-      h += "<div class='sub'>" + esc(e.degree) + (e.location ? " · " + esc(e.location) : "") + "</div>";
-      h += ulist(e.details);
-      h += "</div>";
-    });
-    h += "</section>";
-  }
-
-  // ---- Research Interests ----
-  if (data.interests && data.interests.length) {
-    h += "<section><h2>Research Interests</h2><p style='margin:0;'>" +
-         data.interests.map(esc).join(" · ") + "</p></section>";
-  }
-
-  // ---- Publications ----
-  if (data.publications && data.publications.length) {
-    h += "<section><h2>Publications</h2>";
-    data.publications.forEach(function (p) {
-      var authors = esc(p.authors);
-      if (p.me) authors = authors.replace(esc(p.me), "<span class='me'>" + esc(p.me) + "</span>");
-      h += "<div class='pub'>";
-      h += "<div class='pub-authors'>" + authors + ".</div>";
-      h += "<div class='pub-title'>&ldquo;<strong>" + esc(p.title) + "</strong>.&rdquo; <em>" +
-           esc(p.venue) + "</em>, " + esc(p.year) + ".";
-      if (p.tag) h += " (" + esc(p.tag) + ")";
-      if (p.doi) h += " DOI: " + esc(p.doi) + ".";
-      h += "</div>";
-      h += "</div>";
-      h += ulist(p.bullets);
-    });
-    h += "</section>";
-  }
-
-  // ---- Research Experience ----
-  if (data.research && data.research.length) {
-    h += "<section><h2>Research Experience</h2>";
-    data.research.forEach(function (r) {
-      h += "<div class='entry'>";
-      h += "<div class='entry-head'><span class='left'>" + esc(r.title) +
-           "</span><span class='right'>" + esc(r.date) + "</span></div>";
-      if (r.org) h += "<div class='sub'>" + esc(r.org) + "</div>";
-      h += ulist(r.bullets);
-      h += "</div>";
-    });
-    h += "</section>";
-  }
-
-  // ---- Internship / Experience ----
-  if (data.experience && data.experience.length) {
-    h += "<section><h2>Internship Experience</h2>";
-    data.experience.forEach(function (x) {
-      h += "<div class='entry'>";
-      h += "<div class='entry-head'><span class='left'>" + esc(x.org) + " — " + esc(x.role) +
-           "</span><span class='right'>" + (x.location ? esc(x.location) + " · " : "") + esc(x.date) + "</span></div>";
-      if (x.summary) h += "<div class='sub'>" + esc(x.summary) + "</div>";
-      (x.groups || []).forEach(function (g) {
-        if (g.name) h += "<div class='role-block'>" + esc(g.name) + "</div>";
-        h += ulist(g.bullets);
-      });
-      h += "</div>";
-    });
-    h += "</section>";
-  }
-
-  // ---- Skills ----
-  if (data.skills && data.skills.length) {
-    h += "<section><h2>Technical Skills</h2>";
-    data.skills.forEach(function (s) {
-      h += "<div class='skills-row'><div class='k'>" + esc(s.category) +
-           "</div><div class='v'>" + esc(s.items) + "</div></div>";
-    });
-    h += "</section>";
-  }
-
-  // ---- Honors & Languages ----
-  if (data.honors && data.honors.length) {
-    h += "<section><h2>Honors &amp; Languages</h2>" + ulist(data.honors) + "</section>";
-  }
-
-  document.getElementById("cv").innerHTML = h;
-  document.title = (bx.name || "CV") + " — CV";
+/* default skeleton ensures all keys exist */
+function defaults(){
+  var base = (window.CV_DATA ? deepClone(window.CV_DATA) : {});
+  base.basics   = base.basics   || {name:"",headline:"",email:"",phone:"",github:"",website:"",location:""};
+  base.avatar   = base.avatar   || "";
+  base.headerCenter = !!base.headerCenter;
+  base.summary  = base.summary  || "";
+  base.interests= base.interests|| [];
+  base.education= base.education|| [];
+  base.publications = base.publications || [];
+  base.research = base.research || [];
+  base.experience = base.experience || [];
+  base.skills   = base.skills   || [];
+  base.honors   = base.honors   || [];
+  base.custom   = base.custom   || [];          // [{title, type:'list'|'text', items:[], text:'', hidden}]
+  base.hidden   = base.hidden   || {};          // {summary:false, education:false, ...}
+  return base;
 }
 
-// Load cv-data.js with a cache-busting timestamp so freshly published
-// content shows up without a hard refresh. Placed after renderCV so the
-// function is guaranteed defined when the script finishes loading.
-(function () {
-  var s = document.createElement("script");
-  s.src = "cv-data.js?v=" + Date.now();
-  s.onload = function () { renderCV(); };
-  s.onerror = function () {
-    document.getElementById("cv").innerHTML =
-      "<p style='color:#c0392b'>Failed to load cv-data.js</p>";
-  };
-  document.head.appendChild(s);
-})();
+var DATA;
+function load(){
+  var saved=null;
+  try{var raw=localStorage.getItem(STORE_KEY);if(raw)saved=JSON.parse(raw);}catch(e){}
+  DATA = saved || defaults();
+  // backfill any missing keys (in case schema grew)
+  var d=defaults();for(var k in d){if(!(k in DATA))DATA[k]=d[k];}
+}
+function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(DATA));}catch(e){toast("保存失败：存储已满");}}
+function update(){save();renderCV();}
+
+/* section visibility */
+function isHidden(key){return !!DATA.hidden[key];}
+function toggleSec(key){DATA.hidden[key]=!DATA.hidden[key];renderForm();update();}
+
+/* array move/remove */
+function move(arr,i,d){var j=i+d;if(j<0||j>=arr.length)return;var t=arr[i];arr[i]=arr[j];arr[j]=t;renderForm();update();}
+function removeAt(arr,i){arr.splice(i,1);renderForm();update();}
+
+/* ============================ form widgets ============================ */
+function section(title,key){
+  var fs=el("fieldset");if(key&&isHidden(key))fs.className="sec-hidden";
+  var lg=el("legend");lg.appendChild(document.createTextNode(title));
+  if(key){var t=el("span",{class:"toggle"},isHidden(key)?"显示该板块":"隐藏该板块");
+    t.onclick=function(){toggleSec(key);};lg.appendChild(t);}
+  fs.appendChild(lg);return fs;
+}
+function field(label,val,onchange){
+  var w=el("div");w.appendChild(el("label",null,label));
+  var i=el("input",{type:"text"});i.value=val||"";i.oninput=function(){onchange(i.value);update();};
+  w.appendChild(i);return w;
+}
+function area(label,val,onchange,rows){
+  var w=el("div");if(label)w.appendChild(el("label",null,label));
+  var t=el("textarea",{rows:rows||4});t.value=val||"";t.oninput=function(){onchange(t.value);update();};
+  w.appendChild(t);return w;
+}
+function bulletArea(label,arr,setter){
+  return area(label+"（每行一条）",(arr||[]).join("\n"),function(v){
+    setter(v.split("\n").map(function(s){return s.replace(/\s+$/,"");}).filter(function(s){return s.length;}));
+  },Math.max(3,(arr||[]).length+1));
+}
+function addBtn(text,fn){var b=el("button",{type:"button",class:"add-btn"},text);b.onclick=fn;return b;}
+function card(arr,i,title){
+  var c=el("div",{class:"card"});
+  if(title)c.appendChild(el("div",{class:"card-title"},title));
+  var w=el("div",{class:"cbtns"});
+  var up=el("button",{class:"mv",title:"上移"},"↑");up.onclick=function(){move(arr,i,-1);};
+  var dn=el("button",{class:"mv",title:"下移"},"↓");dn.onclick=function(){move(arr,i,1);};
+  var rm=el("button",{class:"rm"},"删除");rm.onclick=function(){removeAt(arr,i);};
+  w.appendChild(up);w.appendChild(dn);w.appendChild(rm);c.appendChild(w);return c;
+}
+
+/* ============================ render form ============================ */
+function renderForm(){
+  var f=document.getElementById("form");f.innerHTML="";
+
+  /* Basics + avatar */
+  var b=DATA.basics;
+  var fsB=section("基本信息");
+  // avatar
+  var av=el("div");av.appendChild(el("label",null,"头像（可选）"));
+  var arow=el("div",{class:"avatar-row"});
+  var img=el("img",{class:"avatar-prev"});img.src=DATA.avatar||"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' fill='%23e7ebf0'/%3E%3C/svg%3E";
+  var upWrap=el("div");
+  var fileLbl=el("label",{class:"add-btn"},"上传头像");fileLbl.style.display="inline-block";
+  var file=el("input",{type:"file",accept:"image/*"});file.style.display="none";
+  file.onchange=function(){var fl=file.files[0];if(!fl)return;
+    var rd=new FileReader();rd.onload=function(){DATA.avatar=rd.result;renderForm();update();toast("头像已更新");};rd.readAsDataURL(fl);};
+  fileLbl.appendChild(file);upWrap.appendChild(fileLbl);
+  if(DATA.avatar){var del=el("button",{type:"button",class:"add-btn"},"删除头像");del.style.background="#f0c0bb";del.style.color="#8a1c0e";del.style.marginLeft="8px";
+    del.onclick=function(){DATA.avatar="";renderForm();update();};upWrap.appendChild(del);}
+  var cl=el("div",{class:"hint"},"勾选下方可让头像与姓名居中显示");
+  upWrap.appendChild(cl);
+  arow.appendChild(img);arow.appendChild(upWrap);av.appendChild(arow);
+  fsB.appendChild(av);
+  // center toggle
+  var ctr=el("label");ctr.style.fontWeight="600";ctr.style.marginTop="8px";
+  var cb=el("input",{type:"checkbox"});cb.checked=DATA.headerCenter;cb.style.width="auto";cb.style.marginRight="6px";
+  cb.onchange=function(){DATA.headerCenter=cb.checked;update();};
+  ctr.appendChild(cb);ctr.appendChild(document.createTextNode("头部居中布局"));fsB.appendChild(ctr);
+
+  fsB.appendChild(field("姓名",b.name,function(v){b.name=v;}));
+  fsB.appendChild(field("一句话标签 (headline)",b.headline,function(v){b.headline=v;}));
+  var r1=el("div",{class:"row"});
+  r1.appendChild(field("邮箱",b.email,function(v){b.email=v;}));
+  r1.appendChild(field("电话",b.phone,function(v){b.phone=v;}));fsB.appendChild(r1);
+  var r2=el("div",{class:"row"});
+  r2.appendChild(field("GitHub 用户名",b.github,function(v){b.github=v;}));
+  r2.appendChild(field("个人主页",b.website,function(v){b.website=v;}));
+  r2.appendChild(field("所在地",b.location,function(v){b.location=v;}));fsB.appendChild(r2);
+  f.appendChild(fsB);
+
+  /* Summary */
+  var fsS=section("个人简介 (Summary)","summary");
+  fsS.appendChild(area("简介",DATA.summary,function(v){DATA.summary=v;},3));
+  f.appendChild(fsS);
+
+  /* Interests */
+  var fsI=section("研究兴趣 (Research Interests)","interests");
+  fsI.appendChild(area("每行一条",( DATA.interests||[]).join("\n"),function(v){
+    DATA.interests=v.split("\n").map(function(s){return s.trim();}).filter(Boolean);},
+    Math.max(3,(DATA.interests||[]).length+1)));
+  f.appendChild(fsI);
+
+  /* Education */
+  var fsE=section("教育经历 (Education)","education");
+  DATA.education.forEach(function(e,i){
+    var c=card(DATA.education,i,"教育 #"+(i+1));
+    c.appendChild(field("学校",e.school,function(v){e.school=v;}));
+    var r=el("div",{class:"row"});
+    r.appendChild(field("学位/专业",e.degree,function(v){e.degree=v;}));
+    r.appendChild(field("地点",e.location,function(v){e.location=v;}));
+    r.appendChild(field("时间",e.date,function(v){e.date=v;}));c.appendChild(r);
+    c.appendChild(bulletArea("详情",e.details,function(a){e.details=a;}));fsE.appendChild(c);});
+  fsE.appendChild(addBtn("+ 添加教育经历",function(){DATA.education.push({school:"",degree:"",location:"",date:"",details:[]});renderForm();update();}));
+  f.appendChild(fsE);
+
+  /* Publications */
+  var fsP=section("论文 (Publications)","publications");
+  DATA.publications.forEach(function(p,i){
+    var c=card(DATA.publications,i,"论文 #"+(i+1));
+    c.appendChild(field("作者列表",p.authors,function(v){p.authors=v;}));
+    var r=el("div",{class:"row"});
+    r.appendChild(field("我的名字(下划线)",p.me,function(v){p.me=v;}));
+    r.appendChild(field("年份",p.year,function(v){p.year=v;}));c.appendChild(r);
+    c.appendChild(field("标题",p.title,function(v){p.title=v;}));
+    c.appendChild(field("会议/期刊(可含 CCF 等级)",p.venue,function(v){p.venue=v;}));
+    c.appendChild(field("DOI(可选)",p.doi,function(v){p.doi=v;}));
+    c.appendChild(bulletArea("贡献要点",p.bullets,function(a){p.bullets=a;}));fsP.appendChild(c);});
+  fsP.appendChild(addBtn("+ 添加论文",function(){DATA.publications.push({authors:"",me:"",title:"",venue:"",year:"",doi:"",bullets:[]});renderForm();update();}));
+  f.appendChild(fsP);
+
+  /* Research */
+  var fsR=section("研究经历 (Research Experience)","research");
+  DATA.research.forEach(function(r,i){
+    var c=card(DATA.research,i,"研究 #"+(i+1));
+    c.appendChild(field("标题",r.title,function(v){r.title=v;}));
+    var row=el("div",{class:"row"});
+    row.appendChild(field("单位/导师",r.org,function(v){r.org=v;}));
+    row.appendChild(field("时间",r.date,function(v){r.date=v;}));c.appendChild(row);
+    c.appendChild(bulletArea("要点",r.bullets,function(a){r.bullets=a;}));fsR.appendChild(c);});
+  fsR.appendChild(addBtn("+ 添加研究经历",function(){DATA.research.push({title:"",org:"",date:"",bullets:[]});renderForm();update();}));
+  f.appendChild(fsR);
+
+  /* Experience */
+  var fsX=section("实习经历 (Experience)","experience");
+  DATA.experience.forEach(function(x,i){
+    var c=card(DATA.experience,i,"实习 #"+(i+1));
+    var r=el("div",{class:"row"});
+    r.appendChild(field("公司",x.org,function(v){x.org=v;}));
+    r.appendChild(field("职位",x.role,function(v){x.role=v;}));c.appendChild(r);
+    var r2=el("div",{class:"row"});
+    r2.appendChild(field("地点",x.location,function(v){x.location=v;}));
+    r2.appendChild(field("时间",x.date,function(v){x.date=v;}));c.appendChild(r2);
+    c.appendChild(area("一句话概述",x.summary,function(v){x.summary=v;},2));
+    (x.groups||[]).forEach(function(g,gi){
+      var gc=el("div",{class:"card"});gc.style.background="#fff";
+      var rm=el("button",{type:"button",class:"rm"},"删子模块");rm.style.position="absolute";rm.style.right="8px";rm.style.top="8px";rm.style.border="0";rm.style.borderRadius="5px";rm.style.padding="2px 7px";rm.style.cursor="pointer";
+      rm.onclick=function(){x.groups.splice(gi,1);renderForm();update();};gc.appendChild(rm);
+      gc.appendChild(field("子模块标题(可空)",g.name,function(v){g.name=v;}));
+      gc.appendChild(bulletArea("要点",g.bullets,function(a){g.bullets=a;}));c.appendChild(gc);});
+    c.appendChild(addBtn("+ 添加子模块",function(){(x.groups=x.groups||[]).push({name:"",bullets:[]});renderForm();update();}));
+    fsX.appendChild(c);});
+  fsX.appendChild(addBtn("+ 添加实习",function(){DATA.experience.push({org:"",role:"",location:"",date:"",summary:"",groups:[{name:"",bullets:[]}]});renderForm();update();}));
+  f.appendChild(fsX);
+
+  /* Skills */
+  var fsK=section("技能 (Technical Skills)","skills");
+  DATA.skills.forEach(function(s,i){
+    var c=card(DATA.skills,i,"技能 #"+(i+1));
+    c.appendChild(field("类别",s.category,function(v){s.category=v;}));
+    c.appendChild(field("内容",s.items,function(v){s.items=v;}));fsK.appendChild(c);});
+  fsK.appendChild(addBtn("+ 添加技能类别",function(){DATA.skills.push({category:"",items:""});renderForm();update();}));
+  f.appendChild(fsK);
+
+  /* Honors */
+  var fsH=section("荣誉与语言 (Honors & Languages)","honors");
+  fsH.appendChild(area("每行一条",(DATA.honors||[]).join("\n"),function(v){
+    DATA.honors=v.split("\n").map(function(s){return s.replace(/\s+$/,"");}).filter(Boolean);},
+    Math.max(3,(DATA.honors||[]).length+1)));
+  f.appendChild(fsH);
+
+  /* Custom sections */
+  var fsC=section("自定义板块 (Custom Sections)");
+  DATA.custom.forEach(function(cs,i){
+    var c=card(DATA.custom,i,"自定义 #"+(i+1));
+    c.appendChild(field("板块标题（英文，将显示在简历上）",cs.title,function(v){cs.title=v;}));
+    var tr=el("div");tr.appendChild(el("label",null,"内容类型"));
+    var sel=el("select");sel.innerHTML="<option value='list'>列表（每行一条 bullet）</option><option value='text'>段落文本</option>";
+    sel.value=cs.type||"list";sel.onchange=function(){cs.type=sel.value;renderForm();update();};
+    tr.appendChild(sel);c.appendChild(tr);
+    if((cs.type||"list")==="list"){
+      c.appendChild(bulletArea("条目",cs.items,function(a){cs.items=a;}));
+    }else{
+      c.appendChild(area("段落",cs.text,function(v){cs.text=v;},4));
+    }
+    fsC.appendChild(c);});
+  fsC.appendChild(addBtn("+ 添加自定义板块",function(){DATA.custom.push({title:"New Section",type:"list",items:[],text:""});renderForm();update();}));
+  f.appendChild(fsC);
+}
+
+/* ============================ render CV ============================ */
+function ulist(arr){if(!arr||!arr.length)return "";
+  return "<ul>"+arr.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+"</ul>";}
+
+function renderCV(){
+  var d=DATA,h="",bx=d.basics||{};
+  /* header */
+  var contact=[];
+  if(bx.email)contact.push("<span>"+esc(bx.email)+"</span>");
+  if(bx.phone)contact.push("<span>"+esc(bx.phone)+"</span>");
+  if(bx.github)contact.push("<span>github.com/"+esc(bx.github)+"</span>");
+  if(bx.website)contact.push("<span>"+esc(bx.website)+"</span>");
+  if(bx.location)contact.push("<span>"+esc(bx.location)+"</span>");
+  h+="<div class='cv-head"+(d.headerCenter?" center":"")+"'>";
+  if(d.avatar)h+="<img class='avatar' src='"+d.avatar+"' alt='avatar'>";
+  h+="<div class='htext'>";
+  h+="<h1>"+esc(bx.name)+"</h1>";
+  if(bx.headline)h+="<div class='headline'>"+esc(bx.headline)+"</div>";
+  h+="<div class='contact'>"+contact.join("<span class='sep'>·</span>")+"</div>";
+  h+="</div></div>";
+
+  if(!isHidden("summary")&&d.summary)
+    h+="<section><h2>Summary</h2><p class='summary'>"+esc(d.summary)+"</p></section>";
+
+  if(!isHidden("education")&&d.education&&d.education.length){
+    h+="<section><h2>Education</h2>";
+    d.education.forEach(function(e){
+      h+="<div class='entry'><div class='entry-head'><span class='left'>"+esc(e.school)+
+         "</span><span class='right'>"+esc(e.date)+"</span></div>";
+      h+="<div class='sub'>"+esc(e.degree)+(e.location?" · "+esc(e.location):"")+"</div>";
+      h+=ulist(e.details)+"</div>";});
+    h+="</section>";}
+
+  if(!isHidden("interests")&&d.interests&&d.interests.length)
+    h+="<section><h2>Research Interests</h2><p style='margin:0;'>"+d.interests.map(esc).join(" · ")+"</p></section>";
+
+  if(!isHidden("publications")&&d.publications&&d.publications.length){
+    h+="<section><h2>Publications</h2>";
+    d.publications.forEach(function(p){
+      var au=esc(p.authors);if(p.me)au=au.replace(esc(p.me),"<span class='me'>"+esc(p.me)+"</span>");
+      h+="<div class='pub'><div class='pub-authors'>"+au+".</div>";
+      h+="<div class='pub-title'>&ldquo;<strong>"+esc(p.title)+"</strong>.&rdquo; <em>"+esc(p.venue)+"</em>, "+esc(p.year)+".";
+      if(p.doi)h+=" DOI: "+esc(p.doi)+".";
+      h+="</div></div>"+ulist(p.bullets);});
+    h+="</section>";}
+
+  if(!isHidden("research")&&d.research&&d.research.length){
+    h+="<section><h2>Research Experience</h2>";
+    d.research.forEach(function(r){
+      h+="<div class='entry'><div class='entry-head'><span class='left'>"+esc(r.title)+
+         "</span><span class='right'>"+esc(r.date)+"</span></div>";
+      if(r.org)h+="<div class='sub'>"+esc(r.org)+"</div>";
+      h+=ulist(r.bullets)+"</div>";});
+    h+="</section>";}
+
+  if(!isHidden("experience")&&d.experience&&d.experience.length){
+    h+="<section><h2>Experience</h2>";
+    d.experience.forEach(function(x){
+      h+="<div class='entry'><div class='entry-head'><span class='left'>"+esc(x.org)+" — "+esc(x.role)+
+         "</span><span class='right'>"+(x.location?esc(x.location)+" · ":"")+esc(x.date)+"</span></div>";
+      if(x.summary)h+="<div class='sub'>"+esc(x.summary)+"</div>";
+      (x.groups||[]).forEach(function(g){if(g.name)h+="<div class='role-block'>"+esc(g.name)+"</div>";h+=ulist(g.bullets);});
+      h+="</div>";});
+    h+="</section>";}
+
+  if(!isHidden("skills")&&d.skills&&d.skills.length){
+    h+="<section><h2>Technical Skills</h2>";
+    d.skills.forEach(function(s){h+="<div class='skills-row'><div class='k'>"+esc(s.category)+"</div><div class='v'>"+esc(s.items)+"</div></div>";});
+    h+="</section>";}
+
+  if(!isHidden("honors")&&d.honors&&d.honors.length)
+    h+="<section><h2>Honors &amp; Languages</h2>"+ulist(d.honors)+"</section>";
+
+  /* custom sections */
+  (d.custom||[]).forEach(function(cs){
+    if(cs.hidden)return;
+    var has=(cs.type==="text")?(cs.text&&cs.text.trim()):(cs.items&&cs.items.length);
+    if(!cs.title||!has)return;
+    h+="<section><h2>"+esc(cs.title)+"</h2>";
+    if(cs.type==="text")h+="<p class='summary'>"+esc(cs.text)+"</p>";
+    else h+=ulist(cs.items);
+    h+="</section>";});
+
+  document.getElementById("cv").innerHTML=h;
+  document.title=(bx.name||"CV")+" — CV";
+}
+
+/* ============================ toolbar actions ============================ */
+function toggleEditor(){
+  var ed=document.getElementById("editor"),btn=document.getElementById("toggleBtn");
+  if(ed.style.display==="none"){ed.style.display="";btn.textContent="👁 隐藏编辑栏";}
+  else{ed.style.display="none";btn.textContent="✎ 显示编辑栏";}
+}
+function exportJSON(){
+  var blob=new Blob([JSON.stringify(DATA,null,2)],{type:"application/json"});
+  var a=el("a");a.href=URL.createObjectURL(blob);a.download="cv-data.json";a.click();
+  URL.revokeObjectURL(a.href);toast("已导出 JSON 备份");
+}
+function importJSON(input){
+  var fl=input.files[0];if(!fl)return;
+  var rd=new FileReader();rd.onload=function(){
+    try{var obj=JSON.parse(rd.result);DATA=obj;var def=defaults();for(var k in def){if(!(k in DATA))DATA[k]=def[k];}
+      save();renderForm();renderCV();toast("已导入 JSON");}
+    catch(e){toast("导入失败：JSON 格式错误");}
+    input.value="";};
+  rd.readAsText(fl);
+}
+function resetDefault(){
+  if(!confirm("确定恢复为默认内容？当前编辑将被覆盖（建议先导出 JSON 备份）。"))return;
+  DATA=defaults();save();renderForm();renderCV();toast("已恢复默认");
+}
+
+/* ============================ boot ============================ */
+load();renderForm();renderCV();
 </script>
 </body>
 </html>

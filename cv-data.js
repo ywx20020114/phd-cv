@@ -1,6 +1,10 @@
 /* =====================================================================
- *  CV DATA  —  Wanxiang Yu
- *  Exported from admin.html. Overwrite this file and push to update the live CV.
+ *  CV DATA  —  Wanxiang Yu  (default / seed content)
+ *  This is the initial data the live editor (index.html) loads on first
+ *  visit. After that, edits are saved in the browser (localStorage) and
+ *  can be backed up via "导出 JSON". To change the built-in default, edit
+ *  this file. The editor also supports: avatar upload, custom sections,
+ *  show/hide sections, reorder, JSON import/export, and Save-as-PDF.
  * ===================================================================== */
 window.CV_DATA = {
   "basics": {
