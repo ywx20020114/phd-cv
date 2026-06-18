@@ -14,9 +14,9 @@ window.CV_DATA = {
     "phone": "19815840515",
     "github": "",
     "website": "https://ywx20020114.github.io/phd-cv",
-    "location": "Tianjin, China"
+    "location": ""
   },
-  "summary": "M.Eng. student at Nankai University working on large language models for software engineering. First-author-level contributor to CoMRA (SANER 2026, CCF-B), a RAG- and multi-agent-based framework for automated code migration. Seeking a Ph.D. position in code intelligence and LLM-based software engineering.",
+  "summary": "",
   "interests": [
     "LLM for Software Engineering",
     "Code Intelligence & Automated Code Migration",
@@ -62,26 +62,14 @@ window.CV_DATA = {
       ]
     }
   ],
-  "research": [
-    {
-      "title": "CoMRA: Automated Code Migration via RAG and Multi-Agent Collaboration",
-      "org": "Nankai University · Advisor: Prof. Yuzhi Zhang",
-      "date": "2024 – 2025",
-      "bullets": [
-        "Investigated whether retrieval-augmented generation and agent collaboration can make LLM-driven code migration reliable and verifiable, rather than relying on a single end-to-end prompt.",
-        "Designed a detection–migration–verification multi-agent workflow with a compile–feedback–repair closed loop, and built a RAG knowledge base of migration rules and API mappings.",
-        "Constructed the evaluation benchmark and ran the experiments; reached 98% conversion accuracy on Qt4→Qt5 (194 programs) vs. 56–84% for general-purpose LLM baselines, with cross-ecosystem validation on Python 2→3 and Java 8→17.",
-        "Outcome: accepted to SANER 2026 (CCF-B)."
-      ]
-    }
-  ],
+  "research": [],
   "experience": [
     {
       "org": "Shopee (China)",
       "role": "AI Platform Engineering Intern",
       "location": "Beijing",
       "date": "Jun 2025 – May 2026",
-      "summary": "Built infrastructure and LLM-agent components for the in-house ML training platform and LLM gateway, with a focus on reliability of LLM-driven systems.",
+      "summary": "",
       "groups": [
         {
           "name": "LLM Training Platform (Compass Admin)",
@@ -104,7 +92,7 @@ window.CV_DATA = {
       "role": "Recommendation Architecture Intern",
       "location": "Beijing",
       "date": "May 2026 – Sep 2026",
-      "summary": "Worked on recall and mixed-ranking for in-feed ad recommendation, spanning learning-based ranking and large-scale serving systems.",
+      "summary": "",
       "groups": [
         {
           "name": "",
@@ -132,11 +120,15 @@ window.CV_DATA = {
     }
   ],
   "honors": [
-    "Awards: Nankai University Gongneng (\u201cPublic-Spirited & Capable\u201d) Scholarship; Nankai University Sports & Arts Scholarship",
+    "Awards: Nankai University Gongneng Scholarship; Nankai University Sports & Arts Scholarship",
     "Languages: Chinese (native); English — IELTS (in preparation)"
   ],
   "avatar": "",
   "headerCenter": true,
   "custom": [],
-  "hidden": {}
+  "hidden": {
+    "summary": false,
+    "research": false,
+    "skills": true
+  }
 };
