@@ -91,7 +91,7 @@
   .paper li{margin-bottom:3px;}
   .paper li::marker{color:var(--accent);}
   .pub{margin-bottom:8px;line-height:1.5;}
-  .pub .me{text-decoration:underline;}
+  .pub .me{font-weight:bold;}
   .pub-authors{margin-bottom:1px;}
   .pub-title{padding-left:0;}
   .skills-row{display:flex;gap:8px;margin-bottom:4px;}
@@ -305,7 +305,7 @@ function renderForm(){
     var c=card(DATA.publications,i,"论文 #"+(i+1));
     c.appendChild(field("作者列表",p.authors,function(v){p.authors=v;}));
     var r=el("div",{class:"row"});
-    r.appendChild(field("我的名字(下划线)",p.me,function(v){p.me=v;}));
+    r.appendChild(field("我的名字(加粗)",p.me,function(v){p.me=v;}));
     r.appendChild(field("年份",p.year,function(v){p.year=v;}));c.appendChild(r);
     c.appendChild(field("标题",p.title,function(v){p.title=v;}));
     c.appendChild(field("会议/期刊(可含 CCF 等级)",p.venue,function(v){p.venue=v;}));
