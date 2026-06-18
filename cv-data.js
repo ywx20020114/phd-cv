@@ -9,16 +9,19 @@
 window.CV_DATA = {
   "basics": {
     "name": "Wanxiang Yu",
-    "headline": "",
+    "headline": "M.Eng. Student in Software Engineering, Nankai University",
     "email": "onexiangg.yu@gmail.com",
     "phone": "19815840515",
     "github": "",
-    "website": "",
-    "location": ""
+    "website": "https://ywx20020114.github.io/phd-cv",
+    "location": "Tianjin, China"
   },
-  "summary": "",
+  "summary": "M.Eng. student at Nankai University working on large language models for software engineering. First-author-level contributor to CoMRA (SANER 2026, CCF-B), a RAG- and multi-agent-based framework for automated code migration. Seeking a Ph.D. position in code intelligence and LLM-based software engineering.",
   "interests": [
-    "需要按照老师修改"
+    "LLM for Software Engineering",
+    "Code Intelligence & Automated Code Migration",
+    "Retrieval-Augmented Generation (RAG)",
+    "LLM-based Multi-Agent Systems"
   ],
   "education": [
     {
@@ -28,8 +31,8 @@ window.CV_DATA = {
       "date": "2024 – 2027",
       "details": [
         "Advisor: Prof. Yuzhi Zhang",
-        "GPA: X.XX / 4.0  (Rank X / N, top X%)",
-        "Coursework: Machine Learning, Distributed Systems, Algorithms, …（选择一些成绩好的课）"
+        "GPA: — / 4.0",
+        "Selected Coursework: Machine Learning, Algorithms, Discrete Mathematics"
       ]
     },
     {
@@ -38,7 +41,7 @@ window.CV_DATA = {
       "location": "Tianjin, China",
       "date": "2020 – 2024",
       "details": [
-        "GPA: X.XX / 4.0"
+        "GPA: — / 4.0"
       ]
     }
   ],
@@ -47,8 +50,8 @@ window.CV_DATA = {
       "authors": "Bin Lu, Wanxiang Yu, Haolin Wang, Jiayi Zhao, Yuzhi Zhang, and Rui Chen",
       "me": "Wanxiang Yu",
       "title": "CoMRA: A Framework for Automated Code Migration via Retrieval-Augmented Generation and Multi-Agent Collaboration",
-      "venue": "SANER（CCF-B）",
-      "year": "2026",
+      "venue": "SANER 2026 (CCF-B)",
+      "year": "to appear",
       "doi": "",
       "tag": "",
       "bullets": [
@@ -59,45 +62,56 @@ window.CV_DATA = {
       ]
     }
   ],
-  "research": [],
+  "research": [
+    {
+      "title": "CoMRA: Automated Code Migration via RAG and Multi-Agent Collaboration",
+      "org": "Nankai University · Advisor: Prof. Yuzhi Zhang",
+      "date": "2024 – 2025",
+      "bullets": [
+        "Investigated whether retrieval-augmented generation and agent collaboration can make LLM-driven code migration reliable and verifiable, rather than relying on a single end-to-end prompt.",
+        "Designed a detection–migration–verification multi-agent workflow with a compile–feedback–repair closed loop, and built a RAG knowledge base of migration rules and API mappings.",
+        "Constructed the evaluation benchmark and ran the experiments; reached 98% conversion accuracy on Qt4→Qt5 (194 programs) vs. 56–84% for general-purpose LLM baselines, with cross-ecosystem validation on Python 2→3 and Java 8→17.",
+        "Outcome: accepted to SANER 2026 (CCF-B)."
+      ]
+    }
+  ],
   "experience": [
     {
-      "org": "Shopee(China)",
+      "org": "Shopee (China)",
       "role": "AI Platform Engineering Intern",
       "location": "Beijing",
       "date": "Jun 2025 – May 2026",
-      "summary": "Built core backend for Astrolabe, the internal ML experiment-management platform, and independently owned modules of the LLM Gateway (unified enterprise LLM API gateway).",
+      "summary": "Built infrastructure and LLM-agent components for the in-house ML training platform and LLM gateway, with a focus on reliability of LLM-driven systems.",
       "groups": [
         {
-          "name": "ML Training Platform (Astrolabe / Compass-Tuning)",
+          "name": "LLM Training Platform (Compass Admin)",
           "bullets": [
-            "Designed and built the Megatron training Docker image and a 6-stage pipeline (download → convert → train → export → upload → cleanup) supporting multi-node, multi-GPU distributed SFT/CPT/LoRA training.",
-            "Built real-time log streaming + LLM-powered failure diagnosis: bridged AIS Pod-log WebSocket → SSE in FastAPI and streamed LLM analysis via a thread-pool/queue, producing structured root-cause and actionable fixes.",
-            "Designed a layered config-validation system (25+ hard constraints, 6 warnings, 5 hints) for Megatron YAML configs to reject invalid jobs before GPU allocation, saving wasted compute."
+            "Designed and built a Megatron training image and a 6-stage distributed pipeline (download → convert → train → export → upload → cleanup) supporting multi-node, multi-GPU SFT/CPT/LoRA training of large models.",
+            "Designed a layered configuration-validation system that rejects invalid training jobs before GPU allocation, reducing wasted compute on large-scale runs."
           ]
         },
         {
-          "name": "LLM Gateway — Prompts Module & Pricing Agent (independent owner)",
+          "name": "LLM Gateway — Prompt Management & Pricing Agent",
           "bullets": [
-            "Built an end-to-end AI prompt-management service (data model, RESTful API, versioning, dual-format rendering) from scratch in Go .",
-            "Built an autonomous pricing agent (Playwright + ReAct loop) that scrapes vendors' official pricing pages and syncs production MDX docs, with a multi-layer anti-hallucination system (closed-set whitelist prompting, code-level validation, temperature=0, source-text verification, 2-round self-correction with rollback) guaranteeing every published price is source-traceable."
+            "Built a prompt lifecycle-management service (visual orchestration, versioning, multi-format rendering) to support rapid prototyping and deployment of in-house LLM applications.",
+            "Studied hallucination control in LLM agents: built an autonomous pricing agent (Playwright + ReAct) and a multi-layer anti-hallucination scheme (whitelist-constrained prompting, source-text verification, self-correction with rollback) that makes every produced value traceable to its source."
           ]
         }
       ]
     },
     {
-      "org": "Tencent (Weishi Product Center)",
-      "role": "Recommendation Architecture / Ad Engineering Intern",
+      "org": "Tencent",
+      "role": "Recommendation Architecture Intern",
       "location": "Beijing",
       "date": "May 2026 – Sep 2026",
-      "summary": "Worked on the in-feed ad monetization recall & re-ranking (mixed-ranking) stack across three production services (C++ / Go on the tRPC framework).",
+      "summary": "Worked on recall and mixed-ranking for in-feed ad recommendation, spanning learning-based ranking and large-scale serving systems.",
       "groups": [
         {
           "name": "",
           "bullets": [
-            "Contributed to advert_ips, the ad recall & mixed-ranking decision engine: developed DAG operators (ispine/didagle) for SSP ad recall, user-feature extraction, and rule-driven slot strategy (ad first-position / interval / frequency control).",
-            "Worked on the policy service's re-ranking pipeline — a Handler-based chain-of-responsibility flow covering multi-objective scoring, weighting, ranking, AMS eCPM re-estimation, frequency control, and eCPM-twiddle filtering; fusion coefficients computed per-user via an Evolution-Strategy (ES) model with graceful fallback.",
-            "Contributed to the Supply Side Platform (SSP) service (Go/tRPC): DAG-orchestrated request filtering → AMS recall → ad filtering → slot allocation, driven by an mdb rule engine with hot-reloadable configs (Rainbow config center) across scenes."
+            "Onboarded the short-drama secondary-page traffic to the mixed-ranking service, enabling blended ranking of ads and organic content in a new recommendation scenario.",
+            "Worked within the mixed-ranking fusion stage, where per-user ad–content blending coefficients are produced by an Evolution-Strategy model; implemented the fallback-to-default-weights path for cold-start and model-miss cases to keep ranking robust.",
+            "Developed slot-allocation and filtering strategies in the Supply-Side Platform (SSP) service and added new features into the recall/ranking flow to improve ad targeting."
           ]
         }
       ]
@@ -106,23 +120,23 @@ window.CV_DATA = {
   "skills": [
     {
       "category": "Languages",
-      "items": "Go,Python,C++"
+      "items": "Python, Go, C++"
     },
     {
       "category": "ML / LLM",
-      "items": "Megatron, PyTorch, RAG, multi-agent systems, ReAct, prompt engineering"
+      "items": "PyTorch, Megatron, RAG, multi-agent systems, ReAct, prompt engineering"
     },
     {
-      "category": "Systems / Infra",
-      "items": "Docker, Redis, MySQL, Kafka, RPC"
-    },
-    {
-      "category": "Tools",
-      "items": "Git, Linux, LaTeX"
+      "category": "Systems / Tools",
+      "items": "Docker, Redis, MySQL, Git, Linux, LaTeX"
     }
   ],
   "honors": [
-    "Awards: [Scholarships / Competitions / Honors]",
-    "Languages: Chinese (native); English — TOEFL/IELTS [score], GRE [score]"
-  ]
+    "Awards: Nankai University Gongneng (\u201cPublic-Spirited & Capable\u201d) Scholarship; Nankai University Sports & Arts Scholarship",
+    "Languages: Chinese (native); English — IELTS (in preparation)"
+  ],
+  "avatar": "",
+  "headerCenter": true,
+  "custom": [],
+  "hidden": {}
 };
