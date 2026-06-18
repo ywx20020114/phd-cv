@@ -93,7 +93,7 @@
   .pub{margin-bottom:8px;line-height:1.5;}
   .pub .me{text-decoration:underline;}
   .pub-authors{margin-bottom:1px;}
-  .pub-title{padding-left:18px;}
+  .pub-title{padding-left:0;}
   .skills-row{display:flex;gap:8px;margin-bottom:4px;}
   .skills-row .k{flex:0 0 130px;font-weight:bold;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;}
   .skills-row .v{flex:1;}
@@ -405,7 +405,7 @@ function renderCV(){
     d.publications.forEach(function(p){
       var au=esc(p.authors);if(p.me)au=au.replace(esc(p.me),"<span class='me'>"+esc(p.me)+"</span>");
       h+="<div class='pub'><div class='pub-authors'>"+au+".</div>";
-      h+="<div class='pub-title'>&ldquo;<strong>"+esc(p.title)+"</strong>.&rdquo; <em>"+esc(p.venue)+"</em>, "+esc(p.year)+".";
+      h+="<div class='pub-title'><strong>"+esc(p.title)+"</strong>. <em>"+esc(p.venue)+"</em>, "+esc(p.year)+".";
       if(p.doi)h+=" DOI: "+esc(p.doi)+".";
       h+="</div></div>"+ulist(p.bullets);});
     h+="</section>";}
