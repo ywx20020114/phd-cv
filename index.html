@@ -150,9 +150,6 @@
 
 <div id="toast" class="toast"></div>
 
-<!-- default data -->
-<script src="cv-data.js"></script>
-
 <script>
 /* ============================ helpers ============================ */
 function el(tag,attrs,html){var e=document.createElement(tag);
@@ -516,7 +513,17 @@ function setupSyncScroll(){
 }
 
 /* ============================ boot ============================ */
-load();renderForm();renderCV();setupSyncScroll();
+function boot(){ load();renderForm();renderCV();setupSyncScroll(); }
+
+// Load cv-data.js with a cache-busting timestamp so an updated default
+// (the seed content) is always fetched fresh, then boot the app.
+(function loadSeed(){
+  var s=document.createElement("script");
+  s.src="cv-data.js?v="+Date.now();
+  s.onload=boot;
+  s.onerror=function(){ window.CV_DATA=window.CV_DATA||{}; boot(); };
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
