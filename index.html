@@ -476,8 +476,25 @@ function resetDefault(){
   DATA=defaults();save();renderForm();renderCV();toast("已恢复默认");
 }
 
+/* ============================ synced scrolling ============================ */
+function setupSyncScroll(){
+  var ed=document.getElementById("editor");
+  var pv=document.querySelector(".preview-wrap");
+  if(!ed||!pv)return;
+  var lock=false;
+  function ratio(elm){var m=elm.scrollHeight-elm.clientHeight;return m>0?elm.scrollTop/m:0;}
+  function sync(src,dst){
+    if(lock)return;lock=true;
+    var m=dst.scrollHeight-dst.clientHeight;
+    dst.scrollTop=ratio(src)*m;
+    requestAnimationFrame(function(){lock=false;});
+  }
+  ed.addEventListener("scroll",function(){sync(ed,pv);});
+  pv.addEventListener("scroll",function(){sync(pv,ed);});
+}
+
 /* ============================ boot ============================ */
-load();renderForm();renderCV();
+load();renderForm();renderCV();setupSyncScroll();
 </script>
 </body>
 </html>
