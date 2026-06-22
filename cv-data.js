@@ -9,30 +9,30 @@
 window.CV_DATA = {
   "basics": {
     "name": "Wanxiang Yu",
-    "headline": "M.Eng. Student in Software Engineering, Nankai University",
+    "headline": "M.S. in Software Engineering, Nankai University",
     "email": "onexiangg.yu@gmail.com",
     "phone": "19815840515",
     "github": "",
-    "website": "https://ywx20020114.github.io/phd-cv",
+    "website": "",
     "location": ""
   },
   "summary": "",
   "interests": [
     "LLM for Software Engineering",
     "Code Intelligence & Automated Code Migration",
+    "LLM reliability",
     "Retrieval-Augmented Generation (RAG)",
     "LLM-based Multi-Agent Systems"
   ],
   "education": [
     {
       "school": "Nankai University",
-      "degree": "M.Eng. in Software Engineering",
+      "degree": "M.S. in Software Engineering",
       "location": "Tianjin, China",
       "date": "2024 – 2027",
       "details": [
         "Advisor: Prof. Yuzhi Zhang",
-        "GPA: — / 4.0",
-        "Selected Coursework: Machine Learning, Algorithms, Discrete Mathematics"
+        "GPA: 3.79 / 4.0"
       ]
     },
     {
@@ -41,7 +41,8 @@ window.CV_DATA = {
       "location": "Tianjin, China",
       "date": "2020 – 2024",
       "details": [
-        "GPA: — / 4.0"
+        "GPA: — / 4.0",
+        "Relevant Coursework: Machine Learning, Algorithms, Discrete Mathematics"
       ]
     }
   ],
@@ -68,7 +69,7 @@ window.CV_DATA = {
       "org": "Shopee (China)",
       "role": "AI Platform Engineering Intern",
       "location": "Beijing",
-      "date": "Jun 2025 – May 2026",
+      "date": "Jun 2025 – Apr 2026",
       "summary": "",
       "groups": [
         {
@@ -121,7 +122,7 @@ window.CV_DATA = {
   ],
   "honors": [
     "Awards: Nankai University Gongneng Scholarship; Nankai University Sports & Arts Scholarship",
-    "Languages: Chinese (native); English — IELTS (in preparation)"
+    "Languages: English — IELTS (in preparation)"
   ],
   "avatar": "",
   "headerCenter": true,

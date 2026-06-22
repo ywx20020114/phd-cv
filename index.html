@@ -88,12 +88,12 @@
   .entry .sub{font-style:italic;color:var(--muted);font-size:13px;margin:1px 0 4px;}
   .role-block{margin:7px 0 3px;font-weight:bold;font-size:13.5px;color:var(--accent);}
   .paper ul{margin:5px 0 0;padding-left:18px;}
-  .paper li{margin-bottom:3px;}
+  .paper li{margin-bottom:3px;text-align:justify;}
   .paper li::marker{color:var(--accent);}
   .pub{margin-bottom:8px;line-height:1.5;}
   .pub .me{font-weight:bold;}
   .pub-authors{margin-bottom:1px;}
-  .pub-title{padding-left:0;}
+  .pub-title{padding-left:0;text-align:justify;}
   .skills-row{display:flex;gap:8px;margin-bottom:4px;}
   .skills-row .k{flex:0 0 130px;font-weight:bold;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;}
   .skills-row .v{flex:1;}
@@ -417,7 +417,7 @@ function renderCV(){
     h+="</section>";}
 
   if(!isHidden("interests")&&d.interests&&d.interests.length)
-    h+="<section><h2>Research Interests</h2><p style='margin:0;'>"+d.interests.map(esc).join(" · ")+"</p></section>";
+    h+="<section><h2>Research Interests</h2>"+ulist(d.interests)+"</section>";
 
   if(!isHidden("publications")&&d.publications&&d.publications.length){
     h+="<section><h2>Publications</h2>";
